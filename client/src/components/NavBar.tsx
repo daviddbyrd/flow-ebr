@@ -1,9 +1,9 @@
 const NavBar: React.FC = () => {
   return (
-    <div className="fixed w-full h-12 backdrop-blur flex flex-row justify-left">
-      <h1>Flow MES</h1>
-      <h1>Create</h1>
-      <h1>Execute</h1>
+    <div className="fixed w-full h-12 backdrop-blur flex flex-row justify-left top-0">
+      <div className="ml-10 cursor-pointer">Flow MES</div>
+      <div className="ml-10 cursor-pointer">Execute</div>
+      <div className="ml-10 cursor-pointer">Create</div>
     </div>
   );
 };
