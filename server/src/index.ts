@@ -1,11 +1,29 @@
+import { Request, Response } from "express";
 import express from "express";
+import { scanTable } from "./db/client";
 import cors from "cors";
 
 const app = express();
 app.use(cors());
+const PORT = process.env.PORT || 3000;
 
-const PORT = parseInt(process.env.PORT || "3001");
+app.get("/get-organisations", async (req: Request, res: Response) => {
+  try {
+    const items = await scanTable("FlowMES_Organisations_Dev");
+    const response = items?.map((item) => {
+      return {
+        id: item.id.S,
+        name: item.name.S,
+      };
+    });
+    console.log("response:", response);
+    res.json(response);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
+});
 
-app.listen(() => {
-  console.log(`Server listening on port http://localhost:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
