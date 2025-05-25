@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const isExpired = decodedToken.exp * 1000 < Date.now();
 
         if (isExpired) {
-          localStorage.remove("token");
+          localStorage.removeItem("token");
         } else {
           setUser(decodedToken);
           setIsLoggedIn(true);
