@@ -2,9 +2,15 @@ import { Request, Response } from "express";
 import express from "express";
 import { scanTable } from "./db/client";
 import cors from "cors";
+import dotenv from "dotenv";
+import routes from "./routes";
 
+dotenv.config();
 const app = express();
 app.use(cors());
+app.use(express.json());
+app.use("/", routes);
+
 const PORT = process.env.PORT || 3000;
 
 app.get("/get-organisations", async (req: Request, res: Response) => {
