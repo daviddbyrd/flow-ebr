@@ -1,10 +1,17 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
+  const { setUser, setIsLoggedIn } = useAuth();
 
   const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    navigate(`/${e.currentTarget.name}`, { replace: true });
+    navigate(`/home/${e.currentTarget.name}`, { replace: true });
+  };
+
+  const logOut = () => {
+    setUser(null);
+    setIsLoggedIn(false);
   };
 
   return (
@@ -23,6 +30,12 @@ const NavBar: React.FC = () => {
         className="ml-32 cursor-pointer text-lg text-gray-600"
       >
         Create
+      </button>
+      <button
+        onClick={logOut}
+        className="ml-32 cursor-pointer text-lg text-gray-600 text-red-500 ml-auto mr-10"
+      >
+        Log out
       </button>
     </div>
   );

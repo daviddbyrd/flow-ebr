@@ -4,8 +4,14 @@ import { jwtDecode } from "jwt-decode";
 
 export interface User {
   id: string;
+  access: AccessModel[];
   exp: number;
   iat: number;
+}
+
+export interface AccessModel {
+  organisationId: string;
+  role: string;
 }
 
 interface AuthContext {

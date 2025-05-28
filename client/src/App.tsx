@@ -4,6 +4,7 @@ import Execute from "./components/Execute";
 import Orgs from "./components/Orgs";
 import OrgList from "./components/OrgList";
 import Org from "./components/Org";
+import Create from "./components/Create";
 import AuthScreenRedirect from "./utils/AuthScreenRedirect";
 import RequireLoggedIn from "./utils/RequireLoggedIn";
 import { AuthProvider } from "./context/AuthContext";
@@ -27,8 +28,9 @@ const App: React.FC = () => {
                 <Route path=":orgId" element={<Org />} />
               </Route>
             </Route>
-          </Route>
 
+            <Route path="create" element={<Create />}></Route>
+          </Route>
           <Route path="/" element={<AuthScreenRedirect />} />
         </Routes>
       </HashRouter>

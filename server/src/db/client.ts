@@ -3,6 +3,8 @@ import {
   DynamoDBDocumentClient,
   PutCommand,
   ScanCommand,
+  QueryCommand,
+  GetCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 export const client = new DynamoDBClient({
@@ -36,4 +38,61 @@ export const addUser = async (user: User) => {
       Item: user,
     })
   );
+};
+
+export const getUserById = async ({ id }: { id: string }) => {
+  const params = {
+    TableName: process.env.USERS_TABLE,
+    Key: {
+      id: id,
+    },
+  };
+  const response = await docClient.send(new QueryCommand(params));
+  if (response.Count && response.Items) {
+    return response.Items[0];
+  } else {
+    return null;
+  }
+};
+
+export const getUserByEmail = async ({ email }: { email: string }) => {
+  const params = {
+    TableName: process.env.USERS_TABLE,
+    IndexName: "EmailIndex",
+    KeyConditionExpression: "#eml = :emailVal",
+    ExpressionAttributeNames: {
+      "#eml": "email",
+    },
+    ExpressionAttributeValues: {
+      ":emailVal": email,
+    },
+  };
+
+  const response = await docClient.send(new QueryCommand(params));
+  if (response.Count && response.Items) {
+    return response.Items[0];
+  } else {
+    return null;
+  }
+};
+
+export const getUserByUsername = async ({ username }: { username: string }) => {
+  const params = {
+    TableName: process.env.USERS_TABLE,
+    IndexName: "UsernameIndex",
+    KeyConditionExpression: "#usr = :usernameVal",
+    ExpressionAttributeNames: {
+      "#usr": "username",
+    },
+    ExpressionAttributeValues: {
+      ":usernameVal": username,
+    },
+  };
+
+  const response = await docClient.send(new QueryCommand(params));
+  if (response.Count && response.Items) {
+    return response.Items[0];
+  } else {
+    return null;
+  }
 };

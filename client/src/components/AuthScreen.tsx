@@ -18,7 +18,7 @@ const AuthScreen: React.FC = () => {
   };
 
   const handleLogIn = async () => {
-    const response = await axios.post("http://localhost:3000/login", {
+    const response = await axios.post("http://localhost:3000/auth/login", {
       email: logInForm.email,
       password: logInForm.password,
     });
