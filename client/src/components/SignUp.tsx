@@ -9,6 +9,7 @@ interface SignUpProps {
 }
 
 const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
+  const serverUrl = import.meta.env.VITE_SERVER;
   const [logInForm, setLogInForm] = useState({
     email: "",
     username: "",
@@ -36,7 +37,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
   const handleSignUp = async () => {
     if (validateSignUp()) {
       console.log(logInForm);
-      const response = await axios.post("http://localhost:3000/auth/signup", {
+      const response = await axios.post(`${serverUrl}/auth/signup`, {
         email: logInForm.email,
         username: logInForm.username,
         password: logInForm.password,

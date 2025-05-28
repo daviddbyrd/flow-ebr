@@ -18,7 +18,7 @@ const NavBar: React.FC = () => {
     <div className="fixed w-full h-12 backdrop-blur flex flex-row justify-left items-center top-0 border-b border-gray-100">
       <div className="ml-10 cursor-pointer text-lg font-bold">Flow MES</div>
       <button
-        name="execute"
+        name="organisation"
         onClick={(e) => handleNavigate(e)}
         className="ml-32 cursor-pointer text-lg text-gray-600"
       >

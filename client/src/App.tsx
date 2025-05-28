@@ -1,10 +1,11 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import Execute from "./components/Execute";
-import Orgs from "./components/Orgs";
-import OrgList from "./components/OrgList";
-import Org from "./components/Org";
-import Create from "./components/Create";
+import Organisations from "./components/Organisations";
+import OrganisationList from "./components/OrganisationList";
+import Organisation from "./components/Organisation";
+import Locations from "./components/Locations";
+import LocationList from "./components/LocationList";
+import Location from "./components/Location";
 import AuthScreenRedirect from "./utils/AuthScreenRedirect";
 import RequireLoggedIn from "./utils/RequireLoggedIn";
 import { AuthProvider } from "./context/AuthContext";
@@ -22,15 +23,17 @@ const App: React.FC = () => {
               </RequireLoggedIn>
             }
           >
-            <Route path="execute" element={<Execute />}>
-              <Route path="orgs" element={<Orgs />}>
-                <Route index element={<OrgList />} />
-                <Route path=":orgId" element={<Org />} />
+            <Route path="organisation" element={<Organisations />}>
+              <Route index element={<OrganisationList />} />
+              <Route path=":organisationId" element={<Organisation />}>
+                <Route path="location" element={<Locations />}>
+                  <Route index element={<LocationList />} />
+                  <Route path=":locationId" element={<Location />}></Route>
+                </Route>
               </Route>
             </Route>
-
-            <Route path="create" element={<Create />}></Route>
           </Route>
+
           <Route path="/" element={<AuthScreenRedirect />} />
         </Routes>
       </HashRouter>

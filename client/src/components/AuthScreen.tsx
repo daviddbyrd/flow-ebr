@@ -6,6 +6,7 @@ import type { User } from "../context/AuthContext";
 import SignUp from "./SignUp";
 
 const AuthScreen: React.FC = () => {
+  const serverUrl = import.meta.env.VITE_SERVER;
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -18,7 +19,7 @@ const AuthScreen: React.FC = () => {
   };
 
   const handleLogIn = async () => {
-    const response = await axios.post("http://localhost:3000/auth/login", {
+    const response = await axios.post(`${serverUrl}/auth/login`, {
       email: logInForm.email,
       password: logInForm.password,
     });

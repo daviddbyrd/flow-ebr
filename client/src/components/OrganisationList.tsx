@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+import OrgBox from "./OrganisationBox";
 
-interface OrganisationModel {
+export interface OrganisationModel {
   id: string;
   name: string;
 }
 
-const Orgs: React.FC = () => {
+const OrganisationList: React.FC = () => {
+  const serverUrl = import.meta.env.VITE_SERVER;
   const { user } = useAuth();
   const [organisations, setOrganisations] = useState<OrganisationModel[]>([]);
 
@@ -26,7 +27,7 @@ const Orgs: React.FC = () => {
   };
 
   const fetchOrganisation = async (id: string) => {
-    const response = await axios.get(`http://localhost:3000/org/${id}`);
+    const response = await axios.get(`${serverUrl}/org/${id}`);
     if (response.status === 200) {
       return response.data.Item;
     } else {
@@ -37,11 +38,14 @@ const Orgs: React.FC = () => {
   return (
     <div className="w-full h-full">
       {organisations && (
-        <div className="mt-20">{JSON.stringify(organisations)}</div>
+        <div className="mt-15 w-full flex flex-col items-center">
+          {organisations.map((org) => {
+            return <OrgBox key={org.id} organisation={org} />;
+          })}
+        </div>
       )}
-      <Outlet />
     </div>
   );
 };
 
-export default Orgs;
+export default OrganisationList;
