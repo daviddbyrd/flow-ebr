@@ -1,13 +1,27 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import axios from "axios";
 
 const CreateOrganisation: React.FC = () => {
+  const serverUrl = import.meta.env.VITE_SERVER;
   const [name, setName] = useState<string>("");
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async () => {
+    const response = await axios.post(`${serverUrl}/org/`, {
+      name: name,
+      userId: user?.userId,
+    });
+    if (response.status === 200) {
+      console.log(response);
+    }
+  };
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">

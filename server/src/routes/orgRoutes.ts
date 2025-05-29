@@ -4,6 +4,7 @@ import {
   getOrganisation,
   getLocations,
   getLocation,
+  createOrganisation,
 } from "../controllers/orgControllers";
 
 const router = express.Router();
@@ -11,5 +12,6 @@ const router = express.Router();
 router.get("/:organisationId", asyncHandler(getOrganisation));
 router.get("/:organisationId/locations", asyncHandler(getLocations));
 router.get("/:organisationId/location/:locationId", asyncHandler(getLocation));
+router.post("/", asyncHandler(createOrganisation));
 
 export default router;

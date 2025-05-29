@@ -4,7 +4,7 @@ import {
   PutCommand,
   ScanCommand,
   QueryCommand,
-  GetCommand,
+  UpdateCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 export const client = new DynamoDBClient({
@@ -95,4 +95,36 @@ export const getUserByUsername = async ({ username }: { username: string }) => {
   } else {
     return null;
   }
+};
+
+interface AddUserAccessProps {
+  userId: string;
+  organisationId: string;
+  role: "admin" | "user";
+}
+
+export const addUserAccess = async ({
+  userId,
+  organisationId,
+  role,
+}: AddUserAccessProps) => {
+  const params = {
+    TableName: process.env.USERS_TABLE,
+    Key: { userId: userId },
+    UpdateExpression:
+      "SET #ac = list_append(if_not_exists(#ac, :emptyList), :newRole)",
+    ExpressionAttributeNames: {
+      "#ac": "access",
+    },
+    ExpressionAttributeValues: {
+      ":newRole": [
+        {
+          organisationId: organisationId,
+          role: role,
+        },
+      ],
+      ":emptyList": [],
+    },
+  };
+  await docClient.send(new UpdateCommand(params));
 };
