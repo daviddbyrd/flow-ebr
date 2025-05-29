@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import type { OrganisationModel } from "./OrganisationList";
+import type { LocationModel } from "./LocationList";
 import axios from "axios";
 import LocationBox from "./LocationBox";
-import { useParams, useNavigate } from "react-router-dom";
 
-export interface LocationModel {
-  locationId: string;
-  name: string;
-}
-
-const LocationList: React.FC = () => {
+const EditOrganisation: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const navigate = useNavigate();
   const { organisationId } = useParams();
+  const [organisation, setOrganisation] = useState<OrganisationModel | null>(
+    null
+  );
   const [locations, setLocations] = useState<LocationModel[]>([]);
 
   useEffect(() => {
@@ -19,6 +19,23 @@ const LocationList: React.FC = () => {
   }, [organisationId]);
 
   const fetchData = async () => {
+    const organisationId = await fetchOrganisation();
+    if (organisationId) {
+      await fetchLocations(organisationId);
+    }
+  };
+
+  const fetchOrganisation = async () => {
+    const response = await axios.get(`${serverUrl}/org/${organisationId}`);
+    if (response.status === 200) {
+      setOrganisation(response.data.Item);
+      return response.data.Item.organisationId;
+    } else {
+      return null;
+    }
+  };
+
+  const fetchLocations = async (organisationId: string) => {
     const response = await axios.get(
       `${serverUrl}/org/${organisationId}/locations`
     );
@@ -28,7 +45,7 @@ const LocationList: React.FC = () => {
     }
   };
 
-  const goToLocation = (location: LocationModel) => {
+  const goToEditLocation = async (location: LocationModel) => {
     navigate(`${location.locationId}`);
   };
 
@@ -41,7 +58,7 @@ const LocationList: React.FC = () => {
               <LocationBox
                 key={location.locationId}
                 location={location}
-                handleClick={goToLocation}
+                handleClick={goToEditLocation}
               />
             );
           })}
@@ -51,4 +68,4 @@ const LocationList: React.FC = () => {
   );
 };
 
-export default LocationList;
+export default EditOrganisation;

@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { jwtDecode } from "jwt-decode";
 
 export interface User {
-  id: string;
+  userId: string;
   access: AccessModel[];
   exp: number;
   iat: number;

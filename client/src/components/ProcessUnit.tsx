@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-const Location: React.FC = () => {
+const ProcessUnit: React.FC = () => {
   return <Outlet />;
 };
 
-export default Location;
+export default ProcessUnit;

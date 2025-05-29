@@ -10,6 +10,7 @@ const NavBar: React.FC = () => {
   };
 
   const logOut = () => {
+    localStorage.removeItem("token");
     setUser(null);
     setIsLoggedIn(false);
   };
@@ -25,7 +26,7 @@ const NavBar: React.FC = () => {
         Execute
       </button>
       <button
-        name="create"
+        name="create/organisation"
         onClick={(e) => handleNavigate(e)}
         className="ml-32 cursor-pointer text-lg text-gray-600"
       >

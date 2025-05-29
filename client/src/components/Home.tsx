@@ -6,7 +6,9 @@ const Home: React.FC = () => {
   return (
     <div className="w-full h-full">
       <NavBar />
-      <Outlet />
+      <div className="mt-12">
+        <Outlet />
+      </div>
     </div>
   );
 };

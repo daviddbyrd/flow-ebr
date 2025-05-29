@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useState, useEffect } from "react";
+import type { OrganisationModel } from "./OrganisationList";
 import axios from "axios";
-import OrgBox from "./OrganisationBox";
+import OrganisationBox from "./OrganisationBox";
 import { useNavigate } from "react-router-dom";
 
-export interface OrganisationModel {
-  organisationId: string;
-  name: string;
-}
-
-const OrganisationList: React.FC = () => {
+const CreateOrganisationMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const navigate = useNavigate();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [organisations, setOrganisations] = useState<OrganisationModel[]>([]);
 
   useEffect(() => {
@@ -40,20 +36,21 @@ const OrganisationList: React.FC = () => {
     }
   };
 
-  const goToOrganisation = (organisation: OrganisationModel) => {
-    navigate(`${organisation.organisationId}/location`);
+  const goToEditOrganisation = (organisation: OrganisationModel) => {
+    navigate(`${organisation.organisationId}`);
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex flex-col items-center justify-start">
+      <button className="w-1/2 h-20">Create New Organisation</button>
       {organisations && (
         <div className="w-full flex flex-col items-center">
           {organisations.map((org) => {
             return (
-              <OrgBox
+              <OrganisationBox
                 key={org.organisationId}
                 organisation={org}
-                handleClick={goToOrganisation}
+                handleClick={goToEditOrganisation}
               />
             );
           })}
@@ -63,4 +60,4 @@ const OrganisationList: React.FC = () => {
   );
 };
 
-export default OrganisationList;
+export default CreateOrganisationMenu;

@@ -24,7 +24,7 @@ export const scanTable = async (tableName: string) => {
 };
 
 interface User {
-  id: string;
+  userId: string;
   email: string;
   username: string;
   hashedPassword: string;
@@ -40,11 +40,11 @@ export const addUser = async (user: User) => {
   );
 };
 
-export const getUserById = async ({ id }: { id: string }) => {
+export const getUserById = async ({ userId }: { userId: string }) => {
   const params = {
     TableName: process.env.USERS_TABLE,
     Key: {
-      id: id,
+      userId: userId,
     },
   };
   const response = await docClient.send(new QueryCommand(params));

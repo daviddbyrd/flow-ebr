@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import { getUserById } from "../db/client";
 
 export const getUser = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const user = getUserById({ id });
+  const { userId } = req.params;
+  const user = getUserById({ userId });
   if (user) {
     res.status(200).json(user);
   } else {

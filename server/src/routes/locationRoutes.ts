@@ -1,9 +1,9 @@
 import express from "express";
 import { asyncHandler } from "../utils/asyncHandler";
-import { getUser } from "../controllers/userController";
+import { getProcessUnits } from "../controllers/locationControllers";
 
 const router = express.Router();
 
-router.get("/:userId", asyncHandler(getUser));
+router.get("/:locationId/process-units", asyncHandler(getProcessUnits));
 
 export default router;

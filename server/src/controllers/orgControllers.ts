@@ -7,7 +7,7 @@ export const getOrganisation = async (req: Request, res: Response) => {
   const params = {
     TableName: process.env.ORGANISATIONS_TABLE,
     Key: {
-      id: organisationId,
+      organisationId: organisationId,
     },
   };
   const response = await docClient.send(new GetCommand(params));

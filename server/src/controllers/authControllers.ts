@@ -16,7 +16,7 @@ export const login = async (req: Request, res: Response) => {
   const isMatch = await verifyPassword(password, response.hashedPassword);
   if (isMatch) {
     const payload = {
-      id: response.id,
+      userId: response.userId,
       username: response.username,
       access: response.access,
     };
@@ -44,7 +44,7 @@ export const signup = async (req: Request, res: Response) => {
   }
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   await addUser({
-    id: uuidv4(),
+    userId: uuidv4(),
     email,
     username,
     hashedPassword,
