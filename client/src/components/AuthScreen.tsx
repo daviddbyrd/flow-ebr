@@ -68,7 +68,7 @@ const AuthScreen: React.FC = () => {
           <div className="flex-grow border-t border-gray-300" />
         </div>
         <button
-          className="w-80 h-12 text-xl text-white border border-gray-200 rounded-lg my-5 cursor-pointer bg-green-500 shadow-sm"
+          className="w-80 h-12 text-xl text-white border border-gray-200 rounded-lg my-5 cursor-pointer bg-green-300 shadow-sm"
           onClick={() => setIsSigningUp(true)}
         >
           Sign Up

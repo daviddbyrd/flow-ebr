@@ -42,7 +42,12 @@ const EditOrganisationsMenu: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-start">
-      <button className="w-1/2 h-20">Create New Organisation</button>
+      <button
+        className="w-80 h-16 border border-gray-200 mt-8 font-bold text-xl rounded-md bg-green-300 hover:bg-green-400 cursor-pointer"
+        onClick={() => navigate("new")}
+      >
+        Create New Organisation +
+      </button>
       {organisations && (
         <div className="w-full flex flex-col items-center">
           {organisations.map((org) => {

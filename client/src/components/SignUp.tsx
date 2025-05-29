@@ -89,7 +89,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
           className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-5 shadow-sm pl-3 focus:outline-none"
         />
         <button
-          className="w-80 h-12 text-xl text-white border border-gray-200 rounded-lg my-5 cursor-pointer bg-green-500 shadow-sm"
+          className="w-80 h-12 text-xl text-white border border-gray-200 rounded-lg my-5 cursor-pointer bg-green-300 shadow-sm"
           onClick={handleSignUp}
         >
           Sign Up

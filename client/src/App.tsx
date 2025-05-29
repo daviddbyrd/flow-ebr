@@ -59,10 +59,10 @@ const App: React.FC = () => {
 
             <Route path="edit/organisation" element={<EditOrganisations />}>
               <Route index element={<EditOrganisationsMenu />} />
-              <Route path="new-organisation" element={<CreateOrganisation />} />
+              <Route path="new" element={<CreateOrganisation />} />
               <Route path=":organisationId" element={<EditOrganisation />}>
                 <Route index element={<EditOrganisationMenu />} />
-                <Route path="new-location" element={<CreateLocation />} />
+                <Route path="location/new" element={<CreateLocation />} />
                 <Route path="location/:locationId" element={<EditLocation />}>
                   <Route index element={<EditLocationMenu />} />
                   <Route
@@ -75,7 +75,7 @@ const App: React.FC = () => {
                   >
                     <Route index element={<EditProcessUnitMenu />} />
                     <Route
-                      path="new-production-order"
+                      path="production-order/new"
                       element={<CreateProductionOrder />}
                     />
                     <Route
@@ -84,7 +84,7 @@ const App: React.FC = () => {
                     >
                       <Route index element={<EditProductionOrderMenu />} />
                       <Route
-                        path="new-basic-function"
+                        path="basic-function/new"
                         element={<CreateBasicFunction />}
                       />
                       <Route
