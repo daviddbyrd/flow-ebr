@@ -5,7 +5,7 @@ import axios from "axios";
 import OrganisationBox from "./OrganisationBox";
 import { useNavigate } from "react-router-dom";
 
-const CreateOrganisationMenu: React.FC = () => {
+const EditOrganisationMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -60,4 +60,4 @@ const CreateOrganisationMenu: React.FC = () => {
   );
 };
 
-export default CreateOrganisationMenu;
+export default EditOrganisationMenu;

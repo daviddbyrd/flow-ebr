@@ -9,10 +9,12 @@ import Location from "./components/Location";
 import ProcessUnits from "./components/ProcessUnits";
 import ProcessUnitList from "./components/ProcessUnitList";
 import ProcessUnit from "./components/ProcessUnit";
-import CreateOrganisations from "./components/CreateOrganisations";
-import CreateOrganisationMenu from "./components/CreateOrganisationMenu";
+import EditOrganisations from "./components/EditOrganisations";
+import EditOrganisationMenu from "./components/EditOrganisationMenu";
 import CreateOrganisation from "./components/CreateOrganisation";
 import EditOrganisation from "./components/EditOrganisation";
+import CreateLocation from "./components/CreateLocation";
+import EditLocation from "./components/EditLocation";
 import AuthScreenRedirect from "./utils/AuthScreenRedirect";
 import RequireLoggedIn from "./utils/RequireLoggedIn";
 import { AuthProvider } from "./context/AuthContext";
@@ -45,13 +47,38 @@ const App: React.FC = () => {
               </Route>
             </Route>
 
-            <Route path="create/organisation" element={<CreateOrganisations />}>
-              <Route index element={<CreateOrganisationMenu />} />
+            <Route path="edit/organisation" element={<EditOrganisations />}>
+              <Route index element={<EditOrganisationMenu />} />
               <Route path="new-organisation" element={<CreateOrganisation />} />
               <Route path=":organisationId" element={<EditOrganisation />}>
-                <Route path="process-unit" element={<EditProcessUnits />}>
-                  <Route index element={<EditProcessUnitMenu />} />
-                  <Route path=":processUnitId" element={<EditProcessUnit />} />
+                <Route path="new-location" element={<CreateLocation />} />
+                <Route path="location/:locationId" element={<EditLocation />}>
+                  {/* <Route
+                    path="new-process-unit"
+                    element={<CreateProcessUnit />}
+                  />
+                  <Route
+                    path="process-unit/:processUnitId"
+                    element={<EditProcessUnit />}
+                  >
+                    <Route
+                      path="new-production-order"
+                      element={<CreateProductionOrder />}
+                    />
+                    <Route
+                      path="production-order/:productionOrderId"
+                      element={<EditProductionOrder />}
+                    >
+                      <Route
+                        path="new-basic-function"
+                        element={<CreateBasicFunction />}
+                      />
+                      <Route
+                        path="basic-function/:basicFunctionId"
+                        element={<EditBasicFunction />}
+                      />
+                    </Route>
+                  </Route> */}
                 </Route>
               </Route>
             </Route>

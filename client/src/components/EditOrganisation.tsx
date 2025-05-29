@@ -46,7 +46,7 @@ const EditOrganisation: React.FC = () => {
   };
 
   const goToEditLocation = async (location: LocationModel) => {
-    navigate(`${location.locationId}`);
+    navigate(`location/${location.locationId}`);
   };
 
   return (

@@ -1,5 +1,5 @@
 const CreateOrganisation: React.FC = () => {
-  return <></>;
+  return <div>Create Organisation</div>;
 };
 
 export default CreateOrganisation;

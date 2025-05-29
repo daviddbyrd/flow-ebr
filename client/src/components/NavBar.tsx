@@ -26,11 +26,11 @@ const NavBar: React.FC = () => {
         Execute
       </button>
       <button
-        name="create/organisation"
+        name="edit/organisation"
         onClick={(e) => handleNavigate(e)}
         className="ml-32 cursor-pointer text-lg text-gray-600"
       >
-        Create
+        Create/Edit
       </button>
       <button
         onClick={logOut}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProcessUnitBox from "./ProcessUnitBox";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 export interface ProcessUnitModel {
   processUnitId: string;
@@ -10,6 +10,7 @@ export interface ProcessUnitModel {
 
 const ProcessUnitList: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
+  const navigate = useNavigate();
   const { locationId } = useParams();
   const [processUnits, setProcessUnits] = useState<ProcessUnitModel[]>([]);
 
@@ -27,6 +28,10 @@ const ProcessUnitList: React.FC = () => {
     }
   };
 
+  const goToProcessUnit = (processUnit: ProcessUnitModel) => {
+    navigate(`${processUnit.processUnitId}/location`);
+  };
+
   return (
     <div className="w-full h-full">
       {processUnits && (
@@ -36,6 +41,7 @@ const ProcessUnitList: React.FC = () => {
               <ProcessUnitBox
                 key={processUnit.processUnitId}
                 processUnit={processUnit}
+                handleClick={goToProcessUnit}
               />
             );
           })}
