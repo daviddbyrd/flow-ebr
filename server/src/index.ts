@@ -5,6 +5,7 @@ import authRoutes from "./routes/authRoutes";
 import orgRoutes from "./routes/orgRoutes";
 import userRoutes from "./routes/userRoutes";
 import locationRoutes from "./routes/locationRoutes";
+import processUnitRoutes from "./routes/processUnitRoutes";
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ app.use("/auth", authRoutes);
 app.use("/org", orgRoutes);
 app.use("/user", userRoutes);
 app.use("/location", locationRoutes);
+app.use("/process-unit", processUnitRoutes);
 
 const PORT = process.env.PORT || 3000;
 

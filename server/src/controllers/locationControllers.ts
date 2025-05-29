@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { docClient } from "../db/client";
-import { QueryCommand } from "@aws-sdk/lib-dynamodb";
+import { QueryCommand, GetCommand } from "@aws-sdk/lib-dynamodb";
 
 export const getProcessUnits = async (req: Request, res: Response) => {
   const { locationId } = req.params;
@@ -13,4 +13,17 @@ export const getProcessUnits = async (req: Request, res: Response) => {
   };
   const response = await docClient.send(new QueryCommand(params));
   res.status(200).json(response.Items);
+};
+
+export const getProcessUnit = async (req: Request, res: Response) => {
+  const { locationId, processUnitId } = req.params;
+  const params = {
+    TableName: process.env.PROCESS_UNITS_TABLE,
+    Key: {
+      locationId: locationId,
+      processUnitId: processUnitId,
+    },
+  };
+  const response = await docClient.send(new GetCommand(params));
+  res.status(200).json(response.Item);
 };

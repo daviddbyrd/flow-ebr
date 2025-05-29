@@ -1,56 +1,62 @@
-import { useAuth } from "../context/AuthContext";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import type { OrganisationModel } from "./OrganisationList";
+import type { LocationModel } from "./LocationList";
 import axios from "axios";
-import OrganisationBox from "./OrganisationBox";
-import { useNavigate } from "react-router-dom";
+import LocationBox from "./LocationBox";
 
 const EditOrganisationMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const { user } = useAuth();
   const navigate = useNavigate();
-  const [organisations, setOrganisations] = useState<OrganisationModel[]>([]);
+  const { organisationId } = useParams();
+  const [organisation, setOrganisation] = useState<OrganisationModel | null>(
+    null
+  );
+  const [locations, setLocations] = useState<LocationModel[]>([]);
 
   useEffect(() => {
-    console.log(user);
     fetchData();
-  }, [user]);
+  }, [organisationId]);
 
   const fetchData = async () => {
-    const orgs: OrganisationModel[] = [];
-    for (const accessObject of user?.access || []) {
-      const organisation = await fetchOrganisation(accessObject.organisationId);
-      if (organisation) {
-        orgs.push(organisation);
-      }
-    }
-    setOrganisations(orgs);
+    await fetchOrganisation();
+    await fetchLocations();
   };
 
-  const fetchOrganisation = async (id: string) => {
-    const response = await axios.get(`${serverUrl}/org/${id}`);
+  const fetchOrganisation = async () => {
+    const response = await axios.get(`${serverUrl}/org/${organisationId}`);
     if (response.status === 200) {
-      return response.data.Item;
+      setOrganisation(response.data.Item);
+      return response.data.Item.organisationId;
     } else {
       return null;
     }
   };
 
-  const goToEditOrganisation = (organisation: OrganisationModel) => {
-    navigate(`${organisation.organisationId}`);
+  const fetchLocations = async () => {
+    const response = await axios.get(
+      `${serverUrl}/org/${organisationId}/locations`
+    );
+    console.log(response);
+    if (response.status === 200) {
+      setLocations(response.data);
+    }
+  };
+
+  const goToEditLocation = async (location: LocationModel) => {
+    navigate(`location/${location.locationId}`);
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start">
-      <button className="w-1/2 h-20">Create New Organisation</button>
-      {organisations && (
-        <div className="w-full flex flex-col items-center">
-          {organisations.map((org) => {
+    <div className="w-full h-full">
+      {locations && (
+        <div className="mt-15 w-full flex flex-col items-center">
+          {locations.map((location) => {
             return (
-              <OrganisationBox
-                key={org.organisationId}
-                organisation={org}
-                handleClick={goToEditOrganisation}
+              <LocationBox
+                key={location.locationId}
+                location={location}
+                handleClick={goToEditLocation}
               />
             );
           })}

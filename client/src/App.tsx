@@ -10,11 +10,18 @@ import ProcessUnits from "./components/ProcessUnits";
 import ProcessUnitList from "./components/ProcessUnitList";
 import ProcessUnit from "./components/ProcessUnit";
 import EditOrganisations from "./components/EditOrganisations";
-import EditOrganisationMenu from "./components/EditOrganisationMenu";
+import EditOrganisationsMenu from "./components/EditOrganisationsMenu";
 import CreateOrganisation from "./components/CreateOrganisation";
 import EditOrganisation from "./components/EditOrganisation";
+import EditOrganisationMenu from "./components/EditOrganisationMenu";
 import CreateLocation from "./components/CreateLocation";
 import EditLocation from "./components/EditLocation";
+import EditLocationMenu from "./components/EditLocationMenu";
+import CreateProcessUnit from "./components/CreateProcessUnit";
+import EditProcessUnitMenu from "./components/EditProcessUnitMenu";
+import CreateProductionOrder from "./components/CreateProductionOrder";
+import EditProductionOrder from "./components/EditProductionOrder";
+import EditProcessUnit from "./components/EditProcessUnit";
 import AuthScreenRedirect from "./utils/AuthScreenRedirect";
 import RequireLoggedIn from "./utils/RequireLoggedIn";
 import { AuthProvider } from "./context/AuthContext";
@@ -48,12 +55,14 @@ const App: React.FC = () => {
             </Route>
 
             <Route path="edit/organisation" element={<EditOrganisations />}>
-              <Route index element={<EditOrganisationMenu />} />
+              <Route index element={<EditOrganisationsMenu />} />
               <Route path="new-organisation" element={<CreateOrganisation />} />
               <Route path=":organisationId" element={<EditOrganisation />}>
+                <Route index element={<EditOrganisationMenu />} />
                 <Route path="new-location" element={<CreateLocation />} />
                 <Route path="location/:locationId" element={<EditLocation />}>
-                  {/* <Route
+                  <Route index element={<EditLocationMenu />} />
+                  <Route
                     path="new-process-unit"
                     element={<CreateProcessUnit />}
                   />
@@ -61,6 +70,7 @@ const App: React.FC = () => {
                     path="process-unit/:processUnitId"
                     element={<EditProcessUnit />}
                   >
+                    <Route index element={<EditProcessUnitMenu />} />
                     <Route
                       path="new-production-order"
                       element={<CreateProductionOrder />}
@@ -68,7 +78,9 @@ const App: React.FC = () => {
                     <Route
                       path="production-order/:productionOrderId"
                       element={<EditProductionOrder />}
-                    >
+                    />
+                  </Route>
+                  {/*
                       <Route
                         path="new-basic-function"
                         element={<CreateBasicFunction />}
