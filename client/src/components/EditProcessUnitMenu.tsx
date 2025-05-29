@@ -53,7 +53,7 @@ const EditProcessUnitMenu: React.FC = () => {
   const goToEditProductionOrder = async (
     productionOrder: ProductionOrderModel
   ) => {
-    navigate(`${productionOrder.productionOrderId}`);
+    navigate(`production-order/${productionOrder.productionOrderId}`);
   };
 
   return (

@@ -6,6 +6,7 @@ import orgRoutes from "./routes/orgRoutes";
 import userRoutes from "./routes/userRoutes";
 import locationRoutes from "./routes/locationRoutes";
 import processUnitRoutes from "./routes/processUnitRoutes";
+import productionOrderRoutes from "./routes/productionOrderRoutes";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use("/org", orgRoutes);
 app.use("/user", userRoutes);
 app.use("/location", locationRoutes);
 app.use("/process-unit", processUnitRoutes);
+app.use("/production-order", productionOrderRoutes);
 
 const PORT = process.env.PORT || 3000;
 

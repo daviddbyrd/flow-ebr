@@ -17,11 +17,14 @@ import EditOrganisationMenu from "./components/EditOrganisationMenu";
 import CreateLocation from "./components/CreateLocation";
 import EditLocation from "./components/EditLocation";
 import EditLocationMenu from "./components/EditLocationMenu";
+import EditProcessUnit from "./components/EditProcessUnit";
 import CreateProcessUnit from "./components/CreateProcessUnit";
 import EditProcessUnitMenu from "./components/EditProcessUnitMenu";
 import CreateProductionOrder from "./components/CreateProductionOrder";
 import EditProductionOrder from "./components/EditProductionOrder";
-import EditProcessUnit from "./components/EditProcessUnit";
+import EditProductionOrderMenu from "./components/EditProductionOrderMenu";
+import CreateBasicFunction from "./components/CreateBasicFunction";
+import EditBasicFunction from "./components/EditBasicFunction";
 import AuthScreenRedirect from "./utils/AuthScreenRedirect";
 import RequireLoggedIn from "./utils/RequireLoggedIn";
 import { AuthProvider } from "./context/AuthContext";
@@ -78,9 +81,8 @@ const App: React.FC = () => {
                     <Route
                       path="production-order/:productionOrderId"
                       element={<EditProductionOrder />}
-                    />
-                  </Route>
-                  {/*
+                    >
+                      <Route index element={<EditProductionOrderMenu />} />
                       <Route
                         path="new-basic-function"
                         element={<CreateBasicFunction />}
@@ -90,7 +92,7 @@ const App: React.FC = () => {
                         element={<EditBasicFunction />}
                       />
                     </Route>
-                  </Route> */}
+                  </Route>
                 </Route>
               </Route>
             </Route>
