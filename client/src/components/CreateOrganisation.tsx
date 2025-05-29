@@ -6,6 +6,7 @@ import axios from "axios";
 const CreateOrganisation: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const [name, setName] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -14,12 +15,21 @@ const CreateOrganisation: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const response = await axios.post(`${serverUrl}/org/`, {
-      name: name,
-      userId: user?.userId,
-    });
-    if (response.status === 200) {
-      console.log(response);
+    try {
+      const response = await axios.post(`${serverUrl}/org/`, {
+        name: name,
+        userId: user?.userId,
+      });
+      if (response.data.organisationId) {
+        navigate(`/home/edit/organisation/${response.data.organisationId}`);
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        console.log(err);
+        if (err.response?.status === 409) {
+          setError(err.response.data.error);
+        }
+      }
     }
   };
 
@@ -33,6 +43,11 @@ const CreateOrganisation: React.FC = () => {
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-8 shadow-sm pl-3 focus:outline-none"
       />
+      {error && (
+        <div className="w-80 h-12 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
+          {error}
+        </div>
+      )}
       <button
         className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-200 hover:bg-green-300 rounded-lg my-8 cursor-pointer shadow-sm"
         onClick={handleSubmit}
