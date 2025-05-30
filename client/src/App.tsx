@@ -66,7 +66,7 @@ const App: React.FC = () => {
                 <Route path="location/:locationId" element={<EditLocation />}>
                   <Route index element={<EditLocationMenu />} />
                   <Route
-                    path="new-process-unit"
+                    path="process-unit/new"
                     element={<CreateProcessUnit />}
                   />
                   <Route

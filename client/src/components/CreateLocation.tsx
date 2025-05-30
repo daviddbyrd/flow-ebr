@@ -16,8 +16,8 @@ const CreateLocation: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post(`${serverUrl}/location`, {
-        name: name,
-        organisationId: organisationId,
+        name,
+        organisationId,
       });
       if (response.data.locationId) {
         navigate(

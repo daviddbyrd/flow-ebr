@@ -75,7 +75,7 @@ interface Location {
 const addLocation = async (location: Location) => {
   await docClient.send(
     new PutCommand({
-      TableName: process.env.ORGANISATIONS_TABLE,
+      TableName: process.env.LOCATIONS_TABLE,
       Item: location,
     })
   );

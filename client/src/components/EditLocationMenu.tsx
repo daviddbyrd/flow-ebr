@@ -44,7 +44,13 @@ const EditLocationMenu: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full flex flex-col items-center justify-start">
+      <button
+        className="w-80 h-16 border border-gray-200 mt-8 font-bold text-xl rounded-md bg-green-300 hover:bg-green-400 cursor-pointer"
+        onClick={() => navigate("process-unit/new")}
+      >
+        Create New Process Unit +
+      </button>
       {processUnits && (
         <div className="mt-15 w-full flex flex-col items-center">
           {processUnits.map((processUnit) => {
