@@ -28,13 +28,9 @@ const EditProcessUnitMenu: React.FC = () => {
   };
 
   const fetchProcessUnit = async () => {
-    console.log(
-      `${serverUrl}/location/${locationId}/process-unit/${processUnitId}`
-    );
     const response = await axios.get(
       `${serverUrl}/location/${locationId}/process-unit/${processUnitId}`
     );
-    console.log(response);
     if (response.status === 200) {
       setProcessUnit(response.data);
     }
@@ -44,7 +40,6 @@ const EditProcessUnitMenu: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/process-unit/${processUnitId}/production-orders`
     );
-    console.log(response);
     if (response.status === 200) {
       setProductionOrders(response.data);
     }

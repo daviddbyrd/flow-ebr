@@ -25,7 +25,6 @@ const CreateOrganisation: React.FC = () => {
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        console.log(err);
         if (err.response?.status === 409) {
           setError(err.response.data.error);
         }

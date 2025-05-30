@@ -36,7 +36,6 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
 
   const handleSignUp = async () => {
     if (validateSignUp()) {
-      console.log(logInForm);
       const response = await axios.post(`${serverUrl}/auth/signup`, {
         email: logInForm.email,
         username: logInForm.username,

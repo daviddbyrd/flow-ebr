@@ -30,7 +30,6 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const signup = async (req: Request, res: Response) => {
-  console.log(req.body);
   const { email, username, password } = req.body;
   let response = await getUserByEmail({ email });
   if (response) {

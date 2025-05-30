@@ -12,7 +12,6 @@ const EditOrganisationsMenu: React.FC = () => {
   const [organisations, setOrganisations] = useState<OrganisationModel[]>([]);
 
   useEffect(() => {
-    console.log(user);
     fetchData();
   }, [user]);
 

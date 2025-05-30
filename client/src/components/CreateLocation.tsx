@@ -15,7 +15,6 @@ const CreateLocation: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      console.log("route:", `${serverUrl}/location`);
       const response = await axios.post(`${serverUrl}/location`, {
         name: name,
         organisationId: organisationId,
@@ -27,7 +26,6 @@ const CreateLocation: React.FC = () => {
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        console.log(err);
         if (err.response?.status === 409) {
           setError(err.response.data.error);
         }

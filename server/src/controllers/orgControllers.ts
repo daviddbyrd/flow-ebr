@@ -12,7 +12,6 @@ export const getOrganisation = async (req: Request, res: Response) => {
     },
   };
   const response = await docClient.send(new GetCommand(params));
-  console.log("response:, ", response);
   res.status(200).json(response);
 };
 

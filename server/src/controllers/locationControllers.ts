@@ -31,9 +31,7 @@ export const getProcessUnit = async (req: Request, res: Response) => {
 
 export const createLocation = async (req: Request, res: Response) => {
   const { name, organisationId } = req.body;
-  console.log("name: ", name, " orgnanisationId: ", organisationId);
   const isUnique = await isUniqueLocationName(name, organisationId);
-  console.log("isUnique:", isUnique);
   if (isUnique) {
     const locationId = uuidv4();
     await addLocation({
@@ -61,7 +59,6 @@ const isUniqueLocationName = async (name: string, organisationId: string) => {
     },
   };
   const response = await docClient.send(new QueryCommand(params));
-  console.log("response: ", response);
   if ((response.Count ?? 0) === 0) {
     return true;
   } else {

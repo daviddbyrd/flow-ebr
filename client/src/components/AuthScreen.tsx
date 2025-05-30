@@ -23,9 +23,7 @@ const AuthScreen: React.FC = () => {
       email: logInForm.email,
       password: logInForm.password,
     });
-    console.log(response);
     if (response.status === 201) {
-      console.log("login successful");
       const token = response.data.token;
       localStorage.setItem("token", token);
       const decoded = jwtDecode<User>(token);

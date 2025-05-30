@@ -31,7 +31,6 @@ interface User {
 }
 
 export const addUser = async (user: User) => {
-  console.log("user:", user);
   await docClient.send(
     new PutCommand({
       TableName: process.env.USERS_TABLE,

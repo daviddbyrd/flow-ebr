@@ -37,7 +37,6 @@ const EditOrganisationMenu: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/org/${organisationId}/locations`
     );
-    console.log(response);
     if (response.status === 200) {
       setLocations(response.data);
     }

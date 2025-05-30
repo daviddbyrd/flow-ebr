@@ -34,7 +34,6 @@ const EditLocationMenu: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/location/${locationId}/process-units`
     );
-    console.log(response);
     if (response.status === 200) {
       setProcessUnits(response.data);
     }

@@ -32,7 +32,6 @@ const EditProductionOrderMenu: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/process-unit/${processUnitId}/production-order/${productionOrderId}`
     );
-    console.log(response);
     if (response.status === 200) {
       setProductionOrder(response.data);
     }
@@ -42,7 +41,6 @@ const EditProductionOrderMenu: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/production-order/${productionOrderId}/basic-functions`
     );
-    console.log(response);
     if (response.status === 200) {
       setBasicFunctions(response.data);
     }
