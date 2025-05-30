@@ -49,7 +49,7 @@ const CreateOrganisation: React.FC = () => {
         </div>
       )}
       <button
-        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-200 hover:bg-green-300 rounded-lg my-8 cursor-pointer shadow-sm"
+        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-8 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
         Create Organisation

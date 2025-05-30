@@ -48,8 +48,8 @@ export const createOrganisation = async (req: Request, res: Response) => {
   if (isUnique) {
     const organisationId = uuidv4();
     await addOrganisation({
-      organisationId: organisationId,
-      name: name,
+      organisationId,
+      name,
     });
 
     await addUserAccess({
@@ -57,7 +57,7 @@ export const createOrganisation = async (req: Request, res: Response) => {
       organisationId: organisationId,
       role: "admin",
     });
-    res.status(201).json({ organisationId: organisationId });
+    res.status(201).json({ organisationId });
   } else {
     res.status(409).json({ error: "Organisation name is already taken." });
   }
@@ -88,7 +88,7 @@ interface Organisation {
   name: string;
 }
 
-export const addOrganisation = async (organisation: Organisation) => {
+const addOrganisation = async (organisation: Organisation) => {
   await docClient.send(
     new PutCommand({
       TableName: process.env.ORGANISATIONS_TABLE,
