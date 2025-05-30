@@ -41,7 +41,7 @@ export const createProcessUnit = async (req: Request, res: Response) => {
     });
     res.status(201).json({ processUnitId });
   } else {
-    res.status(409).json({ error: "Location name is already taken." });
+    res.status(409).json({ error: "Process unit name is already taken." });
   }
 };
 
