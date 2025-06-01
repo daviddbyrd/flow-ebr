@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Select from "react-select";
 
 const basicFunctionTypes = ["multipleChoice", "numericalEntry", "textEntry"];
 
@@ -51,15 +50,21 @@ const CreateBasicFunction: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
-      <Select
-        placeholder="Select basic function type"
+      <select
         name="type"
-        value={info.type}
-        options={basicFunctionTypeOptions}
-        onChange={(selectedOption) =>
-          setInfo({ ...info, type: selectedOption?.value ?? null })
-        }
-      />
+        value={info.type ?? ""}
+        onChange={(e) => handleChange(e)}
+        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-8 shadow-sm pl-3 focus:outline-none"
+      >
+        <option value="" disabled>
+          Select basic function type
+        </option>
+        {basicFunctionTypes.map((type) => (
+          <option key={type} value={type}>
+            {type}
+          </option>
+        ))}
+      </select>
       <input
         type="text"
         name="name"
