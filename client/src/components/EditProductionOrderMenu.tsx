@@ -59,7 +59,7 @@ const EditProductionOrderMenu: React.FC = () => {
         Create New Basic Function +
       </button>
       {basicFunctions && (
-        <div className="mt-15 w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           {basicFunctions.map((basicFunction) => {
             return (
               <BasicFunctionBox

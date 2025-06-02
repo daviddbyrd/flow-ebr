@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import CreateBfMultipleChoice from "./CreateBfMultipleChoice";
+import CreateBfNumericalEntry from "./CreateBfNumericalEntry";
+import CreateBfTextEntry from "./CreateBfTextEntry";
 
-const basicFunctionTypes = ["multipleChoice", "numericalEntry", "textEntry"];
+const basicFunctionTypes = [
+  "multipleChoice",
+  "numericalEntry",
+  "textEntry",
+] as const;
 
 type BasicFunctionTypes = (typeof basicFunctionTypes)[number];
 
@@ -10,30 +17,67 @@ interface BasicFunctionModel {
   type: BasicFunctionTypes | null;
 }
 
-const basicFunctionTypeOptions = [
-  { value: "multipleChoice", label: "Multiple choice" },
-  { value: "numericalEntry", label: "Numerical entry" },
-  { value: "textEntry", label: "Text entry" },
-];
+export interface MultipleChoiceModel extends BasicFunctionModel {
+  type: "multipleChoice";
+  prompt: string;
+  options: string[];
+  successOptions: string[];
+}
 
-const emptyInfo: BasicFunctionModel = {
-  name: "",
-  type: null,
-};
+export interface NumericalEntryModel extends BasicFunctionModel {
+  type: "numericalEntry";
+  min?: number;
+  max?: number;
+}
+
+export interface TextEntryModel extends BasicFunctionModel {
+  type: "textEntry";
+  prompt: string;
+}
+
+type SpecifiedBasicFunctionModel =
+  | MultipleChoiceModel
+  | NumericalEntryModel
+  | TextEntryModel;
+
+const basicFunctionLabels = {
+  multipleChoice: "Multiple choice",
+  numericalEntry: "Numerical entry",
+  textEntry: "Text Entry",
+} satisfies Record<BasicFunctionTypes, string>;
 
 const CreateBasicFunction: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const [info, setInfo] = useState<BasicFunctionModel>(emptyInfo);
+  const [info, setInfo] = useState<SpecifiedBasicFunctionModel | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     console.log(info);
   }, [info]);
 
+  const getEmptyInfo = (
+    type: BasicFunctionTypes
+  ): SpecifiedBasicFunctionModel => {
+    switch (type) {
+      case "multipleChoice":
+        return { name: "", type, prompt: "", options: [], successOptions: [] };
+      case "numericalEntry":
+        return { name: "", type };
+      case "textEntry":
+        return { name: "", type, prompt: "" };
+      default:
+        throw new Error(`Unsupported type: ${type}`);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setInfo({ ...info, [e.target.name]: e.target.value });
+    if (e.target.name === "type") {
+      setInfo(getEmptyInfo(e.target.value));
+    } else if (info !== null) {
+      setInfo({ ...info, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async () => {
@@ -48,38 +92,49 @@ const CreateBasicFunction: React.FC = () => {
     }
   };
 
+  const specifiedBasicFunctionForm = () => {
+    switch (info?.type) {
+      case "multipleChoice":
+        return (
+          <CreateBfMultipleChoice info={info} handleChange={handleChange} />
+        );
+      case "numericalEntry":
+        return (
+          <CreateBfNumericalEntry info={info} handleChange={handleChange} />
+        );
+      case "textEntry":
+        return <CreateBfTextEntry info={info} handleChange={handleChange} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
+      <div>Basic function type</div>
       <select
         name="type"
-        value={info.type ?? ""}
+        value={info?.type ?? ""}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-8 shadow-sm pl-3 focus:outline-none"
+        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       >
         <option value="" disabled>
           Select basic function type
         </option>
-        {basicFunctionTypes.map((type) => (
+        {basicFunctionTypes.map((type: BasicFunctionTypes) => (
           <option key={type} value={type}>
-            {type}
+            {basicFunctionLabels[type]}
           </option>
         ))}
       </select>
-      <input
-        type="text"
-        name="name"
-        placeholder="Enter production order name"
-        value={info.name}
-        onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-8 shadow-sm pl-3 focus:outline-none"
-      />
+      {specifiedBasicFunctionForm()}
       {error && (
         <div className="w-80 h-12 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
           {error}
         </div>
       )}
       <button
-        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-8 cursor-pointer shadow-sm"
+        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-4 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
         Create Production Order

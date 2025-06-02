@@ -60,7 +60,7 @@ const EditProcessUnitMenu: React.FC = () => {
         Create New Production Order +
       </button>
       {productionOrders && (
-        <div className="mt-15 w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           {productionOrders.map((productionOrder) => {
             return (
               <ProductionOrderBox

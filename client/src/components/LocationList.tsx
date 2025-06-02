@@ -34,7 +34,7 @@ const LocationList: React.FC = () => {
   return (
     <div className="w-full h-full">
       {locations && (
-        <div className="mt-15 w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           {locations.map((location) => {
             return (
               <LocationBox

@@ -34,7 +34,7 @@ const ProcessUnitList: React.FC = () => {
   return (
     <div className="w-full h-full">
       {processUnits && (
-        <div className="mt-15 w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center">
           {processUnits.map((processUnit) => {
             return (
               <ProcessUnitBox
