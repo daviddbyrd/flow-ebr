@@ -17,11 +17,15 @@ interface BasicFunctionModel {
   type: BasicFunctionTypes | null;
 }
 
+export interface OptionModel {
+  name: string;
+  isSuccess: boolean;
+}
+
 export interface MultipleChoiceModel extends BasicFunctionModel {
   type: "multipleChoice";
   prompt: string;
-  options: string[];
-  successOptions: string[];
+  options: OptionModel[];
 }
 
 export interface NumericalEntryModel extends BasicFunctionModel {
@@ -60,7 +64,7 @@ const CreateBasicFunction: React.FC = () => {
   ): SpecifiedBasicFunctionModel => {
     switch (type) {
       case "multipleChoice":
-        return { name: "", type, prompt: "", options: [], successOptions: [] };
+        return { name: "", type, prompt: "", options: [] };
       case "numericalEntry":
         return { name: "", type };
       case "textEntry":
@@ -82,7 +86,7 @@ const CreateBasicFunction: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${serverUrl}/production-order`, info);
+      await axios.post(`${serverUrl}/basic-function`, info);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 409) {
@@ -96,7 +100,11 @@ const CreateBasicFunction: React.FC = () => {
     switch (info?.type) {
       case "multipleChoice":
         return (
-          <CreateBfMultipleChoice info={info} handleChange={handleChange} />
+          <CreateBfMultipleChoice
+            info={info}
+            setInfo={setInfo}
+            handleChange={handleChange}
+          />
         );
       case "numericalEntry":
         return (
@@ -110,13 +118,13 @@ const CreateBasicFunction: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <div>Basic function type</div>
+    <div className="w-full h-full flex flex-col items-center justify-start pt-5">
+      <div className="font-bold">Basic function type</div>
       <select
         name="type"
         value={info?.type ?? ""}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="w-80 h-12 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
       >
         <option value="" disabled>
           Select basic function type
