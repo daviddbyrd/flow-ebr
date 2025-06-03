@@ -1,10 +1,11 @@
 import { useState } from "react";
+import type { SetStateAction } from "react";
 import CreateOptionBox from "./CreateOptionBox";
 import type { OptionModel } from "./CreateBasicFunction";
 
 interface CreateOptionsProps {
   options: OptionModel[];
-  setOptions: (newOptions: OptionModel[]) => void;
+  setOptions: React.Dispatch<SetStateAction<OptionModel[]>>;
 }
 
 const CreateOptions: React.FC<CreateOptionsProps> = ({
