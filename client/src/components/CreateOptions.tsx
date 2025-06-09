@@ -27,6 +27,7 @@ const CreateOptions: React.FC<CreateOptionsProps> = ({
         <input
           onChange={(e) => handleChange(e)}
           className="w-60 h-12 text-lg border border-gray-200 rounded-lg shadow-sm pl-3 focus:outline-none"
+          placeholder="Option"
         />
         <button
           className="w-16 h-12 font-bold text-md border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg cursor-pointer shadow-sm"
@@ -35,9 +36,10 @@ const CreateOptions: React.FC<CreateOptionsProps> = ({
           + Add
         </button>
       </div>
-      {options.map((option) => {
+      {options.map((option, ind) => {
         return (
           <CreateOptionBox
+            key={ind}
             option={option}
             options={options}
             setOptions={setOptions}

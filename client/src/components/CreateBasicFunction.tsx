@@ -3,6 +3,7 @@ import axios from "axios";
 import CreateBfMultipleChoice from "./CreateBfMultipleChoice";
 import CreateBfNumericalEntry from "./CreateBfNumericalEntry";
 import CreateBfTextEntry from "./CreateBfTextEntry";
+import { useParams } from "react-router-dom";
 
 const basicFunctionTypes = [
   "multipleChoice",
@@ -54,6 +55,7 @@ const CreateBasicFunction: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const [info, setInfo] = useState<SpecifiedBasicFunctionModel | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { productionOrderId } = useParams();
 
   useEffect(() => {
     console.log(info);
@@ -86,7 +88,11 @@ const CreateBasicFunction: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${serverUrl}/basic-function`, info);
+      console.log(info);
+      await axios.post(`${serverUrl}/basic-function`, {
+        basicFunction: info,
+        productionOrderId: productionOrderId,
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 409) {
