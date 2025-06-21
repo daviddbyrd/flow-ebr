@@ -66,8 +66,9 @@ export const getUserByEmail = async ({ email }: { email: string }) => {
       ":emailVal": email,
     },
   };
-
+  console.log("getUserById 1");
   const response = await docClient.send(new QueryCommand(params));
+  console.log("getUserById 2");
   if (response.Count && response.Items) {
     return response.Items[0];
   } else {

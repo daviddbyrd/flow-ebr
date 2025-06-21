@@ -19,10 +19,13 @@ const AuthScreen: React.FC = () => {
   };
 
   const handleLogIn = async () => {
+    console.log("hello");
+    console.log(`${serverUrl}/auth/login`, logInForm.email, logInForm.password);
     const response = await axios.post(`${serverUrl}/auth/login`, {
       email: logInForm.email,
       password: logInForm.password,
     });
+    console.log(response);
     if (response.status === 201) {
       const token = response.data.token;
       localStorage.setItem("token", token);
@@ -37,7 +40,7 @@ const AuthScreen: React.FC = () => {
   ) : (
     <div className="w-screen h-screen flex items-center justify-center">
       <div className="flex flex-col items-center justify-center">
-        <div className="font-bold text-7xl mb-10 italic">Flow MES</div>
+        <div className="font-bold text-7xl mb-10 italic">Flow EBR</div>
         <input
           type="text"
           name="email"
@@ -66,7 +69,7 @@ const AuthScreen: React.FC = () => {
           <div className="flex-grow border-t border-gray-300" />
         </div>
         <button
-          className="w-80 h-12 text-xl text-white border border-gray-200 rounded-lg my-5 cursor-pointer bg-green-300 shadow-sm"
+          className="w-80 h-12 text-xl font-bold border border-gray-200 rounded-lg my-5 cursor-pointer bg-green-300 shadow-sm"
           onClick={() => setIsSigningUp(true)}
         >
           Sign Up

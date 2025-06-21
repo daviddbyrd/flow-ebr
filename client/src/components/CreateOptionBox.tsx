@@ -20,6 +20,10 @@ const CreateOptionBox: React.FC<CreateOptionsBoxProps> = ({
     setOptions(newOptions);
   };
 
+  const removeOption = () => {
+    setOptions((prev) => prev.filter((item) => item.name !== option.name));
+  };
+
   return (
     <div
       className={`w-80 h-16 rounded-lg border border-gray-200 flex flex-row items-center justify-start my-2 ${
@@ -42,6 +46,7 @@ const CreateOptionBox: React.FC<CreateOptionsBoxProps> = ({
         className={`h-10 w-10 flex items-center justify-center ml-2 mr-4 cursor-pointer hover:bg-red-100 rounded-lg ${
           !option.isSuccess && "ml-auto"
         }`}
+        onClick={removeOption}
       >
         <AiOutlineClose className="text-red-600" size={20} />
       </button>

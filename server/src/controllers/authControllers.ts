@@ -7,12 +7,15 @@ import { v4 as uuidv4 } from "uuid";
 const saltRounds = 10;
 
 export const login = async (req: Request, res: Response) => {
+  console.log("hello");
   const { email, password } = req.body;
   const response = await getUserByEmail({ email });
+  console.log("hello2")
   if (!response) {
     res.status(404).json({ error: "Email not found" });
     return;
   }
+  console.log("hello3");
   const isMatch = await verifyPassword(password, response.hashedPassword);
   if (isMatch) {
     const payload = {
