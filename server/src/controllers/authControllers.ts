@@ -10,7 +10,7 @@ export const login = async (req: Request, res: Response) => {
   console.log("hello");
   const { email, password } = req.body;
   const response = await getUserByEmail({ email });
-  console.log("hello2")
+  console.log("hello2");
   if (!response) {
     res.status(404).json({ error: "Email not found" });
     return;
@@ -45,13 +45,23 @@ export const signup = async (req: Request, res: Response) => {
     return;
   }
   const hashedPassword = await bcrypt.hash(password, saltRounds);
+  const userId = uuidv4();
+  const access = {};
   await addUser({
-    userId: uuidv4(),
+    userId,
     email,
     username,
     hashedPassword,
   });
-  res.status(201).json({ message: "Sign up successful." });
+  const payload = {
+    userId,
+    username,
+    access,
+  };
+  const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+    expiresIn: "30d",
+  });
+  res.status(201).json({ token });
 };
 
 const verifyPassword = async (

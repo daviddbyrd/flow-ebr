@@ -10,7 +10,7 @@ interface SignUpProps {
 
 const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const [logInForm, setLogInForm] = useState({
+  const [signUpForm, setSignUpForm] = useState({
     email: "",
     username: "",
     password: "",
@@ -19,15 +19,15 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
   const { setUser, setIsLoggedIn } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLogInForm({ ...logInForm, [e.target.name]: e.target.value });
+    setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
   };
 
   const validateSignUp = () => {
     if (
-      !logInForm.email.includes("@") ||
-      !logInForm.username ||
-      !logInForm.password ||
-      logInForm.password !== logInForm.confirmPassword
+      !signUpForm.email.includes("@") ||
+      !signUpForm.username ||
+      !signUpForm.password ||
+      signUpForm.password !== signUpForm.confirmPassword
     ) {
       return false;
     }
@@ -35,14 +35,17 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
   };
 
   const handleSignUp = async () => {
+    console.log(validateSignUp());
     if (validateSignUp()) {
       const response = await axios.post(`${serverUrl}/auth/signup`, {
-        email: logInForm.email,
-        username: logInForm.username,
-        password: logInForm.password,
+        email: signUpForm.email,
+        username: signUpForm.username,
+        password: signUpForm.password,
       });
-      if (response.status === 200) {
+      console.log(response);
+      if (response.status === 201) {
         const token = response.data.token;
+        console.log(token);
         localStorage.setItem("token", token);
         const decoded = jwtDecode<User>(token);
         setUser(decoded);
@@ -59,7 +62,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
           type="text"
           name="email"
           placeholder="Email address"
-          value={logInForm.email}
+          value={signUpForm.email}
           onChange={(e) => handleChange(e)}
           className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-5 shadow-sm pl-3 focus:outline-none"
         />
@@ -67,7 +70,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
           type="text"
           name="username"
           placeholder="Username"
-          value={logInForm.username}
+          value={signUpForm.username}
           onChange={(e) => handleChange(e)}
           className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-5 shadow-sm pl-3 focus:outline-none"
         />
@@ -75,7 +78,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
           type="password"
           name="password"
           placeholder="Password"
-          value={logInForm.password}
+          value={signUpForm.password}
           onChange={(e) => handleChange(e)}
           className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-5 shadow-sm pl-3 focus:outline-none"
         />
@@ -83,7 +86,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
           type="password"
           name="confirmPassword"
           placeholder="Confirm password"
-          value={logInForm.confirmPassword}
+          value={signUpForm.confirmPassword}
           onChange={(e) => handleChange(e)}
           className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-5 shadow-sm pl-3 focus:outline-none"
         />

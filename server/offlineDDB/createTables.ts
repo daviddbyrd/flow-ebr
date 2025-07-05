@@ -87,6 +87,7 @@ const tables: CreateTableCommandInput[] = [
     AttributeDefinitions: [
       { AttributeName: "userId", AttributeType: "S" },
       { AttributeName: "username", AttributeType: "S" },
+      { AttributeName: "email", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
@@ -96,6 +97,17 @@ const tables: CreateTableCommandInput[] = [
       {
         IndexName: "UsernameIndex",
         KeySchema: [{ AttributeName: "username", KeyType: "HASH" }],
+        Projection: {
+          ProjectionType: "ALL",
+        },
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
+      },
+      {
+        IndexName: "EmailIndex",
+        KeySchema: [{ AttributeName: "email", KeyType: "HASH" }],
         Projection: {
           ProjectionType: "ALL",
         },
