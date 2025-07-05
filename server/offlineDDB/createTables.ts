@@ -11,7 +11,7 @@ const client = new DynamoDBClient({
 
 const tables: CreateTableCommandInput[] = [
   {
-    TableName: "FLowEBR_Organisations_Dev",
+    TableName: "FlowEBR_Organisations_Dev",
     KeySchema: [{ AttributeName: "organisationId", KeyType: "HASH" }],
     AttributeDefinitions: [
       { AttributeName: "organisationId", AttributeType: "S" },

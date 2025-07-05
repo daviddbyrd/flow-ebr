@@ -11,3 +11,8 @@ sleep 5
 
 echo "Creating tables..."
 npx ts-node createTables.ts
+
+echo "Seeding data..."
+npx ts-node seedData.ts
+
+echo "Setup of local DynamoDB complete."
