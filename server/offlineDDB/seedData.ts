@@ -16,12 +16,30 @@ const items: PutItemCommandInput[] = [
       userId: { S: "1" },
       username: { S: "john" },
       email: { S: "john@example.com" },
-      hashedPassword: { S: "password" },
+      hashedPassword: {
+        S: "$2b$10$rt3Fv4Bf.HmRYuWEbbNgUeY6X1cJkXnMWFYWPQ6Yu/ctDEUsNOXWG",
+      },
       access: {
-        M: {
-          organisationId: { S: "1" },
-          role: { S: "admin" },
-        },
+        L: [
+          {
+            M: {
+              organisationId: { S: "1" },
+              role: { S: "admin" },
+            },
+          },
+          {
+            M: {
+              organisationId: { S: "2" },
+              role: { S: "admin" },
+            },
+          },
+          {
+            M: {
+              organisationId: { S: "3" },
+              role: { S: "admin" },
+            },
+          },
+        ],
       },
     },
   },

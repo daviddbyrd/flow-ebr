@@ -46,7 +46,6 @@ export const signup = async (req: Request, res: Response) => {
   }
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   const userId = uuidv4();
-  const access = {};
   await addUser({
     userId,
     email,
@@ -56,7 +55,7 @@ export const signup = async (req: Request, res: Response) => {
   const payload = {
     userId,
     username,
-    access,
+    access: [],
   };
   const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
     expiresIn: "30d",
