@@ -25,7 +25,7 @@ const CreateBfTextEntry: React.FC<CreateBfTextEntryProps> = ({
         type="text"
         name="prompt"
         placeholder="Prompt"
-        value={info.name}
+        value={info.prompt}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />

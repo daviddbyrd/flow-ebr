@@ -3,7 +3,7 @@ import axios from "axios";
 import CreateBfMultipleChoice from "./CreateBfMultipleChoice";
 import CreateBfNumericalEntry from "./CreateBfNumericalEntry";
 import CreateBfTextEntry from "./CreateBfTextEntry";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const basicFunctionTypes = [
   "multipleChoice",
@@ -56,6 +56,7 @@ const CreateBasicFunction: React.FC = () => {
   const [info, setInfo] = useState<SpecifiedBasicFunctionModel | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { productionOrderId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(info);
@@ -93,6 +94,7 @@ const CreateBasicFunction: React.FC = () => {
         basicFunction: info,
         productionOrderId: productionOrderId,
       });
+      navigate(-1);
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response?.status === 409) {
