@@ -19,9 +19,11 @@ const ProcessUnitList: React.FC = () => {
   }, []);
 
   const fetchData = async () => {
+    console.log("hello");
     const response = await axios.get(
       `${serverUrl}/location/${locationId}/process-units`
     );
+    console.log(response);
     if (response.status === 200) {
       setProcessUnits(response.data);
     }

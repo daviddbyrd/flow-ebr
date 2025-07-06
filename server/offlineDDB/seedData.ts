@@ -128,6 +128,54 @@ const items: PutItemCommandInput[] = [
       name: { S: "Cork" },
     },
   },
+  {
+    TableName: "FlowEBR_ProcessUnits_Dev",
+    Item: {
+      locationId: { S: "1" },
+      processUnitId: { S: "1" },
+      name: { S: "Vial Filling" },
+    },
+  },
+  {
+    TableName: "FlowEBR_ProcessUnits_Dev",
+    Item: {
+      locationId: { S: "1" },
+      processUnitId: { S: "2" },
+      name: { S: "Syringe Filling" },
+    },
+  },
+  {
+    TableName: "FlowEBR_ProductionOrders_Dev",
+    Item: {
+      processUnitId: { S: "1" },
+      productionOrderId: { S: "1" },
+      name: { S: "Vaccine Batch 1234" },
+    },
+  },
+  {
+    TableName: "FlowEBR_ProductionOrders_Dev",
+    Item: {
+      processUnitId: { S: "1" },
+      productionOrderId: { S: "2" },
+      name: { S: "Biologics Batch 717" },
+    },
+  },
+  {
+    TableName: "FlowEBR_ProductionOrders_Dev",
+    Item: {
+      processUnitId: { S: "2" },
+      productionOrderId: { S: "3" },
+      name: { S: "Vaccine Batch 4784" },
+    },
+  },
+  {
+    TableName: "FlowEBR_ProductionOrders_Dev",
+    Item: {
+      processUnitId: { S: "2" },
+      productionOrderId: { S: "4" },
+      name: { S: "Process Simulation 27" },
+    },
+  },
 ];
 
 async function SeedData() {
