@@ -1,4 +1,4 @@
-import type { ProductionOrderModel } from "./EditProcessUnitMenu";
+import type { ProductionOrderModel } from "../ProcessUnit/EditProcessUnitMenu";
 
 interface ProductionOrderBoxProps {
   productionOrder: ProductionOrderModel;

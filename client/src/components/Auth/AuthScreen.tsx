@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { useAuth } from "../context/AuthContext";
-import type { User } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
+import type { User } from "../../context/AuthContext";
 import SignUp from "./SignUp";
 
 const AuthScreen: React.FC = () => {

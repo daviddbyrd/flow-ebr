@@ -1,4 +1,4 @@
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
 import type { OrganisationModel } from "./OrganisationList";
 import axios from "axios";

@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import type { LocationModel } from "./LocationList";
-import type { ProcessUnitModel } from "./ProcessUnitList";
+import type { ProcessUnitModel } from "../ProcessUnit/ProcessUnitList";
 import axios from "axios";
-import ProcessUnitBox from "./ProcessUnitBox";
+import ProcessUnitBox from "../ProcessUnit/ProcessUnitBox";
 
 const EditLocationMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;

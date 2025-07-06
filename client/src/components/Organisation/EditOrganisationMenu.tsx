@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import type { OrganisationModel } from "./OrganisationList";
-import type { LocationModel } from "./LocationList";
+import type { LocationModel } from "../Location/LocationList";
 import axios from "axios";
-import LocationBox from "./LocationBox";
+import LocationBox from "../Location/LocationBox";
 
 const EditOrganisationMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;

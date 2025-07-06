@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import AuthScreen from "../components/AuthScreen";
+import AuthScreen from "../components/Auth/AuthScreen";
 
 const AuthScreenRedirect: React.FC = () => {
   const { isLoggedIn, isLoading } = useAuth();

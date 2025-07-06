@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import BasicFunctionBox from "./BasicFunctionBox";
-import type { ProductionOrderModel } from "./EditProcessUnitMenu";
+import BasicFunctionBox from "../BasicFunction/BasicFunctionBox";
+import type { ProductionOrderModel } from "../ProcessUnit/EditProcessUnitMenu";
 
 export interface BasicFunctionModel {
   basicFunctionId: string;

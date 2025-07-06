@@ -1,4 +1,4 @@
-import type { BasicFunctionModel } from "./EditProductionOrderMenu";
+import type { BasicFunctionModel } from "../ProductionOrder/EditProductionOrderMenu";
 
 interface BasicFunctionBoxProps {
   basicFunction: BasicFunctionModel;

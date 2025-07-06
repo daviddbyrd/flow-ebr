@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import type { ProcessUnitModel } from "./ProcessUnitList";
 import axios from "axios";
-import ProductionOrderBox from "./ProductionOrderBox";
+import ProductionOrderBox from "../ProductionOrder/ProductionOrderBox";
 
 export interface ProductionOrderModel {
   productionOrderId: string;
