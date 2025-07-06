@@ -15,6 +15,7 @@ type BasicFunctionTypes = (typeof basicFunctionTypes)[number];
 
 interface BasicFunctionModel {
   name: string;
+  prompt?: string;
   type: BasicFunctionTypes | null;
 }
 
@@ -25,7 +26,6 @@ export interface OptionModel {
 
 export interface MultipleChoiceModel extends BasicFunctionModel {
   type: "multipleChoice";
-  prompt: string;
   options: OptionModel[];
 }
 
@@ -151,7 +151,7 @@ const CreateBasicFunction: React.FC = () => {
         className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-4 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
-        Create Production Order
+        Create Basic Function
       </button>
     </div>
   );
