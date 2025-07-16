@@ -28,7 +28,7 @@ const LocationList: React.FC = () => {
   };
 
   const goToLocation = (location: LocationModel) => {
-    navigate(`${location.locationId}`);
+    navigate(`${location.locationId}/process-unit`);
   };
 
   return (

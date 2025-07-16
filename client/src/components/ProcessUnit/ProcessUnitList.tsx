@@ -9,6 +9,7 @@ export interface ProcessUnitModel {
 }
 
 const ProcessUnitList: React.FC = () => {
+  console.log("hello");
   const serverUrl = import.meta.env.VITE_SERVER;
   const navigate = useNavigate();
   const { locationId } = useParams();
@@ -30,7 +31,7 @@ const ProcessUnitList: React.FC = () => {
   };
 
   const goToProcessUnit = (processUnit: ProcessUnitModel) => {
-    navigate(`${processUnit.processUnitId}/location`);
+    navigate(`${processUnit.processUnitId}/production-order`);
   };
 
   return (

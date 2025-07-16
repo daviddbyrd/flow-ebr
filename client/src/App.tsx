@@ -9,6 +9,12 @@ import Location from "./components/Location/Location";
 import ProcessUnits from "./components/ProcessUnit/ProcessUnits";
 import ProcessUnitList from "./components/ProcessUnit/ProcessUnitList";
 import ProcessUnit from "./components/ProcessUnit/ProcessUnit";
+import ProductionOrders from "./components/ProductionOrder/ProductionOrders";
+import ProductionOrderList from "./components/ProductionOrder/ProductionOrderList";
+import ProductionOrder from "./components/ProductionOrder/ProductionOrder";
+import BasicFunctions from "./components/BasicFunction/BasicFunctions";
+import BasicFunctionList from "./components/BasicFunction/BasicFunctionList";
+import BasicFunction from "./components/BasicFunction/BasicFunction";
 import EditOrganisations from "./components/Organisation/EditOrganisations";
 import EditOrganisationsMenu from "./components/Organisation/EditOrganisationsMenu";
 import CreateOrganisation from "./components/Organisation/CreateOrganisation";
@@ -50,7 +56,29 @@ const App: React.FC = () => {
                   <Route path=":locationId" element={<Location />}>
                     <Route path="process-unit" element={<ProcessUnits />}>
                       <Route index element={<ProcessUnitList />} />
-                      <Route path=":processUnitId" element={<ProcessUnit />} />
+                      <Route path=":processUnitId" element={<ProcessUnit />}>
+                        <Route
+                          path="production-order"
+                          element={<ProductionOrders />}
+                        >
+                          <Route index element={<ProductionOrderList />} />
+                          <Route
+                            path=":productionOrderId"
+                            element={<ProductionOrder />}
+                          >
+                            <Route
+                              path="basic-function"
+                              element={<BasicFunctions />}
+                            >
+                              <Route index element={<BasicFunctionList />} />
+                              <Route
+                                path=":basicFunctionId"
+                                element={<BasicFunction />}
+                              />
+                            </Route>
+                          </Route>
+                        </Route>
+                      </Route>
                     </Route>
                   </Route>
                 </Route>

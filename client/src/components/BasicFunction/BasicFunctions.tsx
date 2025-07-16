@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 
-const ProcessUnits: React.FC = () => {
+const BasicFunctions: React.FC = () => {
   return (
     <div className="w-full h-full">
       <Outlet />
@@ -8,4 +8,4 @@ const ProcessUnits: React.FC = () => {
   );
 };
 
-export default ProcessUnits;
+export default BasicFunctions;

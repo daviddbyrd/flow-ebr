@@ -17,6 +17,7 @@ interface BasicFunctionModel {
   name: string;
   prompt?: string;
   type: BasicFunctionTypes | null;
+  prerequisites: string[];
 }
 
 export interface OptionModel {
@@ -55,8 +56,10 @@ const CreateBasicFunction: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const [info, setInfo] = useState<SpecifiedBasicFunctionModel | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const { productionOrderId } = useParams();
+  const { productionOrderId, basicFunctionId } = useParams();
   const navigate = useNavigate();
+
+  const isEditMode = basicFunctionId !== "new";
 
   useEffect(() => {
     console.log(info);
@@ -67,11 +70,11 @@ const CreateBasicFunction: React.FC = () => {
   ): SpecifiedBasicFunctionModel => {
     switch (type) {
       case "multipleChoice":
-        return { name: "", type, prompt: "", options: [] };
+        return { name: "", type, prompt: "", options: [], prerequisites: [] };
       case "numericalEntry":
-        return { name: "", type };
+        return { name: "", type, prerequisites: [] };
       case "textEntry":
-        return { name: "", type, prompt: "" };
+        return { name: "", type, prompt: "", prerequisites: [] };
       default:
         throw new Error(`Unsupported type: ${type}`);
     }
@@ -110,7 +113,11 @@ const CreateBasicFunction: React.FC = () => {
         return (
           <CreateBfMultipleChoice
             info={info}
-            setInfo={setInfo}
+            setInfo={
+              setInfo as React.Dispatch<
+                React.SetStateAction<MultipleChoiceModel>
+              >
+            }
             handleChange={handleChange}
           />
         );
@@ -128,6 +135,7 @@ const CreateBasicFunction: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-start pt-5">
       <div className="font-bold">Basic function type</div>
+
       <select
         name="type"
         value={info?.type ?? ""}
@@ -143,12 +151,15 @@ const CreateBasicFunction: React.FC = () => {
           </option>
         ))}
       </select>
+
       {specifiedBasicFunctionForm()}
+
       {error && (
         <div className="w-80 h-12 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
           {error}
         </div>
       )}
+
       <button
         className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-4 cursor-pointer shadow-sm"
         onClick={handleSubmit}
