@@ -24,7 +24,7 @@ const ProductionOrderList: React.FC = () => {
   const fetchData = async () => {
     console.log("hello");
     const response = await axios.get(
-      `${serverUrl}/process-units/${processUnitId}/production-orders`
+      `${serverUrl}/process-unit/${processUnitId}/production-orders`
     );
     console.log(response);
     if (response.status === 200) {
@@ -33,7 +33,7 @@ const ProductionOrderList: React.FC = () => {
   };
 
   const goToProductionOrder = (productionOrder: ProductionOrderModel) => {
-    navigate(`${productionOrder.productionOrderId}/production-order`);
+    navigate(`${productionOrder.productionOrderId}/basic-function`);
   };
 
   return (

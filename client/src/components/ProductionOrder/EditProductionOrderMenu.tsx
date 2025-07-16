@@ -2,7 +2,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BasicFunctionBox from "../BasicFunction/BasicFunctionBox";
-import type { ProductionOrderModel } from "../ProcessUnit/EditProcessUnitMenu";
 
 export interface BasicFunctionModel {
   basicFunctionId: string;
@@ -13,8 +12,6 @@ const EditProductionOrderMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const navigate = useNavigate();
   const { processUnitId, productionOrderId } = useParams();
-  const [productionOrder, setProductionOrder] =
-    useState<ProductionOrderModel | null>(null);
   const [basicFunctions, setBasicFunctions] = useState<BasicFunctionModel[]>(
     []
   );
@@ -24,17 +21,7 @@ const EditProductionOrderMenu: React.FC = () => {
   }, [processUnitId, productionOrderId]);
 
   const fetchData = async () => {
-    await fetchProductionOrder();
     await fetchBasicFunctions();
-  };
-
-  const fetchProductionOrder = async () => {
-    const response = await axios.get(
-      `${serverUrl}/process-unit/${processUnitId}/production-order/${productionOrderId}`
-    );
-    if (response.status === 200) {
-      setProductionOrder(response.data);
-    }
   };
 
   const fetchBasicFunctions = async () => {
