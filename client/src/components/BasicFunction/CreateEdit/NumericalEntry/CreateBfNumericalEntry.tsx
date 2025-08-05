@@ -1,4 +1,4 @@
-import type { NumericalEntryModel } from "./CreateBasicFunction";
+import type { NumericalEntryModel } from "../CreateBasicFunction";
 
 interface CreateBfNumericalEntryProps {
   info: NumericalEntryModel;

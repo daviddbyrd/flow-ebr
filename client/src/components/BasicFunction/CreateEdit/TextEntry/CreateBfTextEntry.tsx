@@ -1,4 +1,4 @@
-import type { TextEntryModel } from "./CreateBasicFunction";
+import type { TextEntryModel } from "./createEdit/CreateBasicFunction";
 
 interface CreateBfTextEntryProps {
   info: TextEntryModel;

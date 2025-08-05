@@ -1,20 +1,59 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import BasicFunctionBox from "../BasicFunction/BasicFunctionBox";
+import ExecuteBasicFunctionBox from "./ExecuteBasicFunctionBox";
 
-export interface BasicFunctionModel {
+const basicFunctionTypes = [
+  "multipleChoice",
+  "numericalEntry",
+  "textEntry",
+] as const;
+
+type BasicFunctionTypes = (typeof basicFunctionTypes)[number];
+
+interface BasicFunctionModel {
   basicFunctionId: string;
   name: string;
+  prompt?: string;
+  type: BasicFunctionTypes | null;
+  prerequisites: string[];
+  isComplete: boolean;
+  isSuccess: boolean;
 }
+
+export interface OptionModel {
+  name: string;
+  isSuccess: boolean;
+}
+
+export interface MultipleChoiceModel extends BasicFunctionModel {
+  type: "multipleChoice";
+  options: OptionModel[];
+  selectedOption: string | null;
+}
+
+export interface NumericalEntryModel extends BasicFunctionModel {
+  type: "numericalEntry";
+  min?: number;
+  max?: number;
+}
+
+export interface TextEntryModel extends BasicFunctionModel {
+  type: "textEntry";
+  prompt: string;
+}
+
+export type SpecifiedBasicFunctionModel =
+  | MultipleChoiceModel
+  | NumericalEntryModel
+  | TextEntryModel;
 
 const BasicFunctionList: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const navigate = useNavigate();
   const { processUnitId, productionOrderId } = useParams();
-  const [basicFunctions, setBasicFunctions] = useState<BasicFunctionModel[]>(
-    []
-  );
+  const [basicFunctions, setBasicFunctions] = useState<
+    SpecifiedBasicFunctionModel[]
+  >([]);
 
   useEffect(() => {
     fetchData();
@@ -28,6 +67,7 @@ const BasicFunctionList: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/production-order/${productionOrderId}/basic-functions`
     );
+    console.log(response);
     if (response.status === 200) {
       setBasicFunctions(response.data);
     }
@@ -39,10 +79,10 @@ const BasicFunctionList: React.FC = () => {
         <div className="w-full flex flex-col items-center">
           {basicFunctions.map((basicFunction) => {
             return (
-              <BasicFunctionBox
+              <ExecuteBasicFunctionBox
                 key={basicFunction.basicFunctionId}
                 basicFunction={basicFunction}
-                handleClick={() => {}}
+                setBasicFunctions={setBasicFunctions}
               />
             );
           })}

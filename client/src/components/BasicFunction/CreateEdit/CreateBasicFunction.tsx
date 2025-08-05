@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import CreateBfMultipleChoice from "./CreateBfMultipleChoice";
-import CreateBfNumericalEntry from "./CreateBfNumericalEntry";
-import CreateBfTextEntry from "./CreateBfTextEntry";
+import CreateBfMultipleChoice from "./MultipleChoice/CreateBfMultipleChoice";
+import CreateBfNumericalEntry from "./NumericalEntry/CreateBfNumericalEntry";
+import CreateBfTextEntry from "./TextEntry/CreateBfTextEntry";
 import { useParams, useNavigate } from "react-router-dom";
 
 const basicFunctionTypes = [
@@ -18,6 +18,8 @@ interface BasicFunctionModel {
   prompt?: string;
   type: BasicFunctionTypes | null;
   prerequisites: string[];
+  isComplete: boolean;
+  isSuccess: boolean;
 }
 
 export interface OptionModel {
@@ -28,6 +30,7 @@ export interface OptionModel {
 export interface MultipleChoiceModel extends BasicFunctionModel {
   type: "multipleChoice";
   options: OptionModel[];
+  selectOption: string | null;
 }
 
 export interface NumericalEntryModel extends BasicFunctionModel {
@@ -70,11 +73,33 @@ const CreateBasicFunction: React.FC = () => {
   ): SpecifiedBasicFunctionModel => {
     switch (type) {
       case "multipleChoice":
-        return { name: "", type, prompt: "", options: [], prerequisites: [] };
+        return {
+          name: "",
+          type,
+          prompt: "",
+          options: [],
+          prerequisites: [],
+          isComplete: false,
+          isSuccess: false,
+          selectOption: null,
+        };
       case "numericalEntry":
-        return { name: "", type, prerequisites: [] };
+        return {
+          name: "",
+          type,
+          prerequisites: [],
+          isComplete: false,
+          isSuccess: false,
+        };
       case "textEntry":
-        return { name: "", type, prompt: "", prerequisites: [] };
+        return {
+          name: "",
+          type,
+          prompt: "",
+          prerequisites: [],
+          isComplete: false,
+          isSuccess: false,
+        };
       default:
         throw new Error(`Unsupported type: ${type}`);
     }

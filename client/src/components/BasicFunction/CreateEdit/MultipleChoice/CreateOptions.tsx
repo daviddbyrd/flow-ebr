@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { SetStateAction } from "react";
 import CreateOptionBox from "./CreateOptionBox";
-import type { OptionModel } from "./CreateBasicFunction";
+import type { OptionModel } from "../CreateBasicFunction";
 
 interface CreateOptionsProps {
   options: OptionModel[];
