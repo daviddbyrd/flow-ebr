@@ -73,6 +73,18 @@ const BasicFunctionList: React.FC = () => {
     }
   };
 
+  const handleSubmit = async (
+    newBasicFunction: SpecifiedBasicFunctionModel
+  ) => {
+    await axios.put(
+      `${serverUrl}/production-order/${productionOrderId}/basic-functions`,
+      {
+        newBasicFunction: newBasicFunction,
+      }
+    );
+    fetchBasicFunctions();
+  };
+
   return (
     <div className="w-full h-full flex flex-col items-center justify-start">
       {basicFunctions && (
@@ -83,6 +95,7 @@ const BasicFunctionList: React.FC = () => {
                 key={basicFunction.basicFunctionId}
                 basicFunction={basicFunction}
                 setBasicFunctions={setBasicFunctions}
+                handleSubmit={handleSubmit}
               />
             );
           })}

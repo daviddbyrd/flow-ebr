@@ -19,7 +19,7 @@ export const getBasicFunctions = async (req: Request, res: Response) => {
 export const getBasicFunction = async (req: Request, res: Response) => {
   const { productionOrderId, basicFunctionId } = req.params;
   const params = {
-    TableName: process.env.PRODUCTION_ORDERS_TABLE,
+    TableName: process.env.BASIC_FUNCTIONS_TABLE,
     Key: {
       productionOrderId: productionOrderId,
       basicFunctionId: basicFunctionId,

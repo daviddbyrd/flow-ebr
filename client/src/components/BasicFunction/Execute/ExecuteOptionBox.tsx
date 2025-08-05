@@ -15,7 +15,7 @@ const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
   return (
     <div
       className={`w-80 h-16 rounded-lg border border-gray-200 flex flex-row items-center justify-start my-2 ${
-        option.isSuccess && "bg-green-100"
+        selectedOption === option.name && "bg-gray-100"
       }`}
       onClick={(e) => e.stopPropagation()}
     >
