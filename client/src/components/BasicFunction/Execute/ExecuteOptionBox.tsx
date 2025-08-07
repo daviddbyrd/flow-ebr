@@ -4,7 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 interface ExecuteOptionsBoxProps {
   option: OptionModel;
   selectedOption: string | null;
-  setSelectedOption: (selectedOption: string) => void;
+  setSelectedOption: (selectedOption: string | null) => void;
 }
 
 const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
@@ -12,6 +12,14 @@ const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
   selectedOption,
   setSelectedOption,
 }) => {
+  const handleChange = () => {
+    if (option.name === selectedOption) {
+      setSelectedOption(null);
+    } else {
+      setSelectedOption(option.name);
+    }
+  };
+
   return (
     <div
       className={`w-80 h-16 rounded-lg border border-gray-200 flex flex-row items-center justify-start my-2 ${
@@ -24,7 +32,7 @@ const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
         className="w-8 h-8 mr-4 ml-auto peer"
         type="checkbox"
         checked={selectedOption === option.name}
-        onChange={() => setSelectedOption(option.name)}
+        onChange={handleChange}
       />
     </div>
   );
