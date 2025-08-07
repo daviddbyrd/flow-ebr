@@ -54,6 +54,13 @@ export const createBasicFunction = async (req: Request, res: Response) => {
   res.status(201).json({ basicFunctionId });
 };
 
+// To add: functionality to check for change and respond with message saying if there is a change or not
+export const updateBasicFunction = async (
+  basicFunction: SpecifiedBasicFunctionModel
+) => {
+  await addBasicFunction(basicFunction);
+};
+
 const addBasicFunction = async (basicFunction: SpecifiedBasicFunctionModel) => {
   await docClient.send(
     new PutCommand({

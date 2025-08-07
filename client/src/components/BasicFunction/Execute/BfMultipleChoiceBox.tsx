@@ -13,7 +13,7 @@ const BfMultipleChoiceBox: React.FC<BasicFunctionBoxProps> = ({
   basicFunction,
   setBasicFunction,
 }) => {
-  const setSelectedOption = (selectedOption: string) => {
+  const setSelectedOption = (selectedOption: string | null) => {
     setBasicFunction({ ...basicFunction, selectedOption: selectedOption });
   };
 
