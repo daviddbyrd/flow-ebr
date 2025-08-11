@@ -1,11 +1,10 @@
-import type { OptionModel } from "./CreateBasicFunction";
-import type { SetStateAction } from "react";
+import type { OptionModel } from "../CreateBasicFunction";
 import { AiOutlineClose } from "react-icons/ai";
 
 interface CreateOptionsBoxProps {
   option: OptionModel;
   options: OptionModel[];
-  setOptions: React.Dispatch<SetStateAction<OptionModel[]>>;
+  setOptions: (options: OptionModel[]) => void;
 }
 
 const CreateOptionBox: React.FC<CreateOptionsBoxProps> = ({
@@ -21,7 +20,7 @@ const CreateOptionBox: React.FC<CreateOptionsBoxProps> = ({
   };
 
   const removeOption = () => {
-    setOptions((prev) => prev.filter((item) => item.name !== option.name));
+    setOptions(options.filter((item) => item.name !== option.name));
   };
 
   return (

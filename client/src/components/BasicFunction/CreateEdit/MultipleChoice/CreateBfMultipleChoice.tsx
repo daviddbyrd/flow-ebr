@@ -17,7 +17,7 @@ const CreateBfMultipleChoice: React.FC<CreateBfMultipleChoiceProps> = ({
   setBasicFunction,
   handleChange,
 }) => {
-  const setOptions = () => {
+  const setOptions = (options: OptionModel[]) => {
     setBasicFunction((prev) => ({ ...prev, options: options }));
   };
 
