@@ -112,12 +112,8 @@ const App: React.FC = () => {
                     >
                       <Route index element={<EditProductionOrderMenu />} />
                       <Route
-                        path="basic-function/new"
-                        element={<CreateBasicFunction />}
-                      />
-                      <Route
                         path="basic-function/:basicFunctionId"
-                        element={<EditBasicFunction />}
+                        element={<CreateBasicFunction />}
                       />
                     </Route>
                   </Route>

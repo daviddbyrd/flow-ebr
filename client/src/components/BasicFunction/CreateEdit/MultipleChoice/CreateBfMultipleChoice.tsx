@@ -1,27 +1,25 @@
-import type { MultipleChoiceModel } from "./CreateBasicFunction";
+import type { MultipleChoiceModel } from "../CreateBasicFunction";
 import CreateOptions from "./CreateOptions";
-import type { OptionModel } from "./CreateBasicFunction";
+import type { OptionModel } from "../CreateBasicFunction";
 import { useState, useEffect } from "react";
 import type { SetStateAction } from "react";
 
 interface CreateBfMultipleChoiceProps {
-  info: MultipleChoiceModel;
-  setInfo: React.Dispatch<SetStateAction<MultipleChoiceModel>>;
+  basicFunction: MultipleChoiceModel;
+  setBasicFunction: React.Dispatch<SetStateAction<MultipleChoiceModel>>;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 }
 
 const CreateBfMultipleChoice: React.FC<CreateBfMultipleChoiceProps> = ({
-  info,
-  setInfo,
+  basicFunction,
+  setBasicFunction,
   handleChange,
 }) => {
-  const [options, setOptions] = useState<OptionModel[]>([]);
-
-  useEffect(() => {
-    setInfo((prev) => ({ ...prev, options: options }));
-  }, [options]);
+  const setOptions = () => {
+    setBasicFunction((prev) => ({ ...prev, options: options }));
+  };
 
   return (
     <>
@@ -29,7 +27,7 @@ const CreateBfMultipleChoice: React.FC<CreateBfMultipleChoiceProps> = ({
         type="text"
         name="name"
         placeholder="Basic function name"
-        value={info.name}
+        value={basicFunction.name}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
@@ -37,11 +35,11 @@ const CreateBfMultipleChoice: React.FC<CreateBfMultipleChoiceProps> = ({
         type="text"
         name="prompt"
         placeholder="Prompt"
-        value={info.prompt}
+        value={basicFunction.prompt}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
-      <CreateOptions options={options} setOptions={setOptions} />
+      <CreateOptions options={basicFunction.options} setOptions={setOptions} />
     </>
   );
 };

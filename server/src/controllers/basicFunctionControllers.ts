@@ -98,6 +98,12 @@ export const updateBasicFunction = async (req: Request, res: Response) => {
   }
 };
 
+export const editBasicFunction = async (req: Request, res: Response) => {
+  const { basicFunction } = req.body;
+  await addBasicFunction(basicFunction);
+  res.status(200);
+};
+
 const addBasicFunction = async (basicFunction: SpecifiedBasicFunctionModel) => {
   await docClient.send(
     new PutCommand({

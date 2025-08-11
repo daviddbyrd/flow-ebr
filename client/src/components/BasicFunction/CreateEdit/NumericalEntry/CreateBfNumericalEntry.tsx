@@ -1,14 +1,14 @@
 import type { NumericalEntryModel } from "../CreateBasicFunction";
 
 interface CreateBfNumericalEntryProps {
-  info: NumericalEntryModel;
+  basicFunction: NumericalEntryModel;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
 }
 
 const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
-  info,
+  basicFunction,
   handleChange,
 }) => {
   return (
@@ -17,7 +17,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         type="text"
         name="name"
         placeholder="Basic function name"
-        value={info.name}
+        value={basicFunction.name}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
@@ -25,7 +25,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         type="text"
         name="prompt"
         placeholder="Prompt"
-        value={info.prompt}
+        value={basicFunction.prompt}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
@@ -33,7 +33,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         type="text"
         name="min"
         placeholder="Min value"
-        value={info.min}
+        value={basicFunction.min}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
@@ -41,7 +41,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         type="text"
         name="max"
         placeholder="Max value"
-        value={info.max}
+        value={basicFunction.max}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />

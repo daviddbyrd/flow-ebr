@@ -14,6 +14,8 @@ const basicFunctionTypes = [
 type BasicFunctionTypes = (typeof basicFunctionTypes)[number];
 
 interface BasicFunctionModel {
+  productionOrderId: string;
+  basicFunctionId: string;
   name: string;
   prompt?: string;
   type: BasicFunctionTypes | null;
@@ -57,7 +59,8 @@ const basicFunctionLabels = {
 
 const CreateBasicFunction: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const [info, setInfo] = useState<SpecifiedBasicFunctionModel | null>(null);
+  const [basicFunction, setBasicFunction] =
+    useState<SpecifiedBasicFunctionModel | null>(null);
   const [error, setError] = useState<string | null>(null);
   const { productionOrderId, basicFunctionId } = useParams();
   const navigate = useNavigate();
@@ -65,15 +68,25 @@ const CreateBasicFunction: React.FC = () => {
   const isEditMode = basicFunctionId !== "new";
 
   useEffect(() => {
-    console.log(info);
-  }, [info]);
+    const fetchBasicFunction = async () => {
+      if (basicFunctionId !== "new") {
+        const response = await axios.get(
+          `${serverUrl}/production-order/${productionOrderId}/basic-function/${basicFunctionId}`
+        );
+        setBasicFunction(response.data);
+      }
+    };
+    fetchBasicFunction();
+  }, [productionOrderId, basicFunctionId]);
 
-  const getEmptyInfo = (
+  const getEmptyBasicFunction = (
     type: BasicFunctionTypes
   ): SpecifiedBasicFunctionModel => {
     switch (type) {
       case "multipleChoice":
         return {
+          productionOrderId: productionOrderId as string,
+          basicFunctionId: "new",
           name: "",
           type,
           prompt: "",
@@ -85,6 +98,8 @@ const CreateBasicFunction: React.FC = () => {
         };
       case "numericalEntry":
         return {
+          productionOrderId: productionOrderId as string,
+          basicFunctionId: "new",
           name: "",
           type,
           prerequisites: [],
@@ -93,6 +108,8 @@ const CreateBasicFunction: React.FC = () => {
         };
       case "textEntry":
         return {
+          productionOrderId: productionOrderId as string,
+          basicFunctionId: "new",
           name: "",
           type,
           prompt: "",
@@ -109,19 +126,25 @@ const CreateBasicFunction: React.FC = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     if (e.target.name === "type") {
-      setInfo(getEmptyInfo(e.target.value));
-    } else if (info !== null) {
-      setInfo({ ...info, [e.target.name]: e.target.value });
+      setBasicFunction(
+        getEmptyBasicFunction(e.target.value as BasicFunctionTypes)
+      );
+    } else if (basicFunction !== null) {
+      setBasicFunction({ ...basicFunction, [e.target.name]: e.target.value });
     }
   };
 
   const handleSubmit = async () => {
     try {
-      console.log(info);
-      await axios.post(`${serverUrl}/basic-function`, {
-        basicFunction: info,
-        productionOrderId: productionOrderId,
-      });
+      if (isEditMode) {
+        await axios.post(`${serverUrl}/basic-function/edit`, {
+          basicFunction,
+        });
+      } else {
+        await axios.post(`${serverUrl}/basic-function/new`, {
+          basicFunction,
+        });
+      }
       navigate(-1);
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -133,13 +156,13 @@ const CreateBasicFunction: React.FC = () => {
   };
 
   const specifiedBasicFunctionForm = () => {
-    switch (info?.type) {
+    switch (basicFunction?.type) {
       case "multipleChoice":
         return (
           <CreateBfMultipleChoice
-            info={info}
-            setInfo={
-              setInfo as React.Dispatch<
+            basicFunction={basicFunction}
+            setBasicFunction={
+              setBasicFunction as React.Dispatch<
                 React.SetStateAction<MultipleChoiceModel>
               >
             }
@@ -148,10 +171,18 @@ const CreateBasicFunction: React.FC = () => {
         );
       case "numericalEntry":
         return (
-          <CreateBfNumericalEntry info={info} handleChange={handleChange} />
+          <CreateBfNumericalEntry
+            basicFunction={basicFunction}
+            handleChange={handleChange}
+          />
         );
       case "textEntry":
-        return <CreateBfTextEntry info={info} handleChange={handleChange} />;
+        return (
+          <CreateBfTextEntry
+            basicFunction={basicFunction}
+            handleChange={handleChange}
+          />
+        );
       default:
         return null;
     }
@@ -163,7 +194,7 @@ const CreateBasicFunction: React.FC = () => {
 
       <select
         name="type"
-        value={info?.type ?? ""}
+        value={basicFunction?.type ?? ""}
         onChange={(e) => handleChange(e)}
         className="w-80 h-12 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
       >
