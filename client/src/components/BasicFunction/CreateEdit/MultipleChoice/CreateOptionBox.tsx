@@ -1,13 +1,13 @@
 import type { OptionModel } from "../CreateBasicFunction";
 import { AiOutlineClose } from "react-icons/ai";
 
-interface CreateOptionsBoxProps {
+interface CreateOptionBoxProps {
   option: OptionModel;
   options: OptionModel[];
   setOptions: (options: OptionModel[]) => void;
 }
 
-const CreateOptionBox: React.FC<CreateOptionsBoxProps> = ({
+const CreateOptionBox: React.FC<CreateOptionBoxProps> = ({
   option,
   options,
   setOptions,

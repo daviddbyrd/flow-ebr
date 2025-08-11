@@ -3,6 +3,7 @@ import axios from "axios";
 import CreateBfMultipleChoice from "./MultipleChoice/CreateBfMultipleChoice";
 import CreateBfNumericalEntry from "./NumericalEntry/CreateBfNumericalEntry";
 import CreateBfTextEntry from "./TextEntry/CreateBfTextEntry";
+import CreatePrerequisites from "./CreatePrerequisites";
 import { useParams, useNavigate } from "react-router-dom";
 
 const basicFunctionTypes = [
@@ -46,7 +47,7 @@ export interface TextEntryModel extends BasicFunctionModel {
   prompt: string;
 }
 
-type SpecifiedBasicFunctionModel =
+export type SpecifiedBasicFunctionModel =
   | MultipleChoiceModel
   | NumericalEntryModel
   | TextEntryModel;
@@ -61,6 +62,9 @@ const CreateBasicFunction: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const [basicFunction, setBasicFunction] =
     useState<SpecifiedBasicFunctionModel | null>(null);
+  const [basicFunctions, setBasicFunctions] = useState<
+    SpecifiedBasicFunctionModel[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
   const { productionOrderId, basicFunctionId } = useParams();
   const navigate = useNavigate();
@@ -69,15 +73,28 @@ const CreateBasicFunction: React.FC = () => {
 
   useEffect(() => {
     const fetchBasicFunction = async () => {
-      if (basicFunctionId !== "new") {
-        const response = await axios.get(
-          `${serverUrl}/production-order/${productionOrderId}/basic-function/${basicFunctionId}`
-        );
-        setBasicFunction(response.data);
-      }
+      const response = await axios.get(
+        `${serverUrl}/production-order/${productionOrderId}/basic-function/${basicFunctionId}`
+      );
+      console.log("fetchBasicFunction, response.data:", response.data);
+      setBasicFunction(response.data);
     };
-    fetchBasicFunction();
-  }, [productionOrderId, basicFunctionId]);
+    const fetchBasicFunctions = async () => {
+      const response = await axios.get(
+        `${serverUrl}/production-order/${productionOrderId}/basic-functions`
+      );
+      setBasicFunctions(response.data);
+    };
+
+    const fetchData = async () => {
+      if (isEditMode) {
+        await fetchBasicFunction();
+      }
+      await fetchBasicFunctions();
+    };
+
+    fetchData();
+  }, [productionOrderId, isEditMode]);
 
   const getEmptyBasicFunction = (
     type: BasicFunctionTypes
@@ -214,6 +231,13 @@ const CreateBasicFunction: React.FC = () => {
         <div className="w-80 h-12 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
           {error}
         </div>
+      )}
+      {basicFunction && (
+        <CreatePrerequisites
+          basicFunction={basicFunction}
+          setBasicFunction={setBasicFunction}
+          basicFunctions={basicFunctions}
+        />
       )}
 
       <button
