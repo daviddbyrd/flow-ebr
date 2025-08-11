@@ -30,7 +30,7 @@ export interface OptionModel {
 export interface MultipleChoiceModel extends BasicFunctionModel {
   type: "multipleChoice";
   options: OptionModel[];
-  selectOption: string | null;
+  selectedOption: string | null;
 }
 
 export interface NumericalEntryModel extends BasicFunctionModel {
@@ -81,7 +81,7 @@ const CreateBasicFunction: React.FC = () => {
           prerequisites: [],
           isComplete: false,
           isSuccess: false,
-          selectOption: null,
+          selectedOption: null,
         };
       case "numericalEntry":
         return {

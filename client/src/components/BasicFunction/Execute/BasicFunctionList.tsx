@@ -76,8 +76,9 @@ const BasicFunctionList: React.FC = () => {
   const handleSubmit = async (
     newBasicFunction: SpecifiedBasicFunctionModel
   ) => {
-    await axios.put(`${serverUrl}/basic-functions`, {
-      newBasicFunction: newBasicFunction,
+    console.log("submitted basic function: ", newBasicFunction);
+    await axios.put(`${serverUrl}/basic-function`, {
+      basicFunction: newBasicFunction,
     });
     fetchBasicFunctions();
   };
