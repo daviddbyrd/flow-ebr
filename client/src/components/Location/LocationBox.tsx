@@ -8,7 +8,7 @@ interface LocationBoxProps {
 const LocationBox: React.FC<LocationBoxProps> = ({ location, handleClick }) => {
   return (
     <div
-      className="h-16 w-6/10 m-5 p-5 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"
+      className="h-16 w-6/10 mt-5 p-5 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer"
       onClick={() => handleClick(location)}
     >
       <div className="font-bold">{location.name}</div>

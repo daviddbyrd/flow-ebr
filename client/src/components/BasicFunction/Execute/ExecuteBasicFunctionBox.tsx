@@ -58,7 +58,7 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
         >
           <div className="flex flex-row w-full items-center justify-between">
             <div className="font-bold">{basicFunction.name}</div>
-            <div className="flex items-center justify-center h-16 w-16">
+            <div className="flex items-center justify-center">
               {!basicFunction.isUnlocked && (
                 <span className="text-2xl">🔒</span>
               )}
@@ -87,7 +87,7 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
       ) : (
         <div
           className={classNames(
-            "flex flex-row items-center h-20 w-6/10 m-5 p-5 border border-gray-200 rounded-md hover:brightness-90 cursor-pointer",
+            "flex flex-row items-center h-16 w-6/10 m-5 p-5 border border-gray-200 rounded-md hover:brightness-90 cursor-pointer",
             {
               "bg-green-200": basicFunction.isSuccess,
               "bg-red-200":
