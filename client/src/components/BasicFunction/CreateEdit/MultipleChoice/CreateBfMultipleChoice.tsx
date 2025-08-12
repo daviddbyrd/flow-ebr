@@ -28,7 +28,7 @@ const CreateBfMultipleChoice: React.FC<CreateBfMultipleChoiceProps> = ({
         placeholder="Basic function name"
         value={basicFunction.name}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="w-80 h-12 flex-shrink-0 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
       <input
         type="text"
@@ -36,7 +36,7 @@ const CreateBfMultipleChoice: React.FC<CreateBfMultipleChoiceProps> = ({
         placeholder="Prompt"
         value={basicFunction.prompt}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="w-80 h-12 flex-shrink-0 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
       <CreateOptions options={basicFunction.options} setOptions={setOptions} />
     </>
