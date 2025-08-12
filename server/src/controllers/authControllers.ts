@@ -20,8 +20,6 @@ export const login = async (req: Request, res: Response) => {
   if (isMatch) {
     const payload = {
       userId: response.userId,
-      username: response.username,
-      access: response.access,
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
       expiresIn: "30d",
@@ -54,8 +52,6 @@ export const signup = async (req: Request, res: Response) => {
   });
   const payload = {
     userId,
-    username,
-    access: [],
   };
   const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
     expiresIn: "30d",

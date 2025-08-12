@@ -16,7 +16,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
     password: "",
     confirmPassword: "",
   });
-  const { setUser, setIsLoggedIn } = useAuth();
+  const { setUserId, setIsLoggedIn } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSignUpForm({ ...signUpForm, [e.target.name]: e.target.value });
@@ -48,7 +48,7 @@ const SignUp: React.FC<SignUpProps> = ({ setIsSigningUp }) => {
         console.log(token);
         localStorage.setItem("token", token);
         const decoded = jwtDecode<User>(token);
-        setUser(decoded);
+        setUserId(decoded.userId);
         setIsLoggedIn(true);
       }
     }

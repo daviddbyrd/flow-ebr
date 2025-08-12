@@ -4,20 +4,16 @@ import { jwtDecode } from "jwt-decode";
 
 export interface User {
   userId: string;
-  access: AccessModel[];
   exp: number;
   iat: number;
 }
 
-export interface AccessModel {
-  organisationId: string;
-  role: string;
-}
-
 interface AuthContext {
-  user: User | null;
+  userId: string | null;
+  exp: number | null;
+  iat: number | null;
   isLoggedIn: boolean;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   isLoading: boolean;
 }
@@ -29,7 +25,9 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContext | null>(null);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [exp, setExp] = useState<number | null>(null);
+  const [iat, setIat] = useState<number | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -44,7 +42,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (isExpired) {
           localStorage.removeItem("token");
         } else {
-          setUser(decodedToken);
+          setUserId(decodedToken.userId);
+          setExp(decodedToken.exp);
+          setIat(decodedToken.iat);
           setIsLoggedIn(true);
         }
       } catch (err) {
@@ -57,7 +57,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isLoggedIn, setUser, setIsLoggedIn, isLoading }}
+      value={{
+        userId,
+        exp,
+        iat,
+        isLoggedIn,
+        setUserId,
+        setIsLoggedIn,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

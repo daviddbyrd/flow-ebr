@@ -8,7 +8,7 @@ const CreateOrganisation: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { userId } = useAuth();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -18,10 +18,10 @@ const CreateOrganisation: React.FC = () => {
     try {
       const response = await axios.post(`${serverUrl}/org/`, {
         name: name,
-        userId: user?.userId,
+        userId: userId,
       });
       if (response.data.organisationId) {
-        navigate(`/home/edit/organisation/${response.data.organisationId}`);
+        navigate("/home/edit/organisation/", { state: { refresh: true } });
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {

@@ -1,23 +1,56 @@
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import type { OrganisationModel } from "./OrganisationList";
 import axios from "axios";
 import OrganisationBox from "./OrganisationBox";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+export interface AccessModel {
+  organisationId: string;
+  role: "admin" | "user";
+}
+
+export interface OrganisationModel {
+  organisationId: string;
+  name: string;
+}
 
 const EditOrganisationsMenu: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
-  const { user } = useAuth();
+  const { userId } = useAuth();
+  const [access, setAccess] = useState<AccessModel[]>([]);
   const navigate = useNavigate();
   const [organisations, setOrganisations] = useState<OrganisationModel[]>([]);
+  const location = useLocation();
 
   useEffect(() => {
-    fetchData();
-  }, [user]);
+    if (location.state?.refresh) {
+      fetchUser();
+    }
+  }, [location.state]);
 
-  const fetchData = async () => {
+  useEffect(() => {
+    fetchUser();
+  }, [userId]);
+
+  useEffect(() => {
+    if (access) {
+      fetchOrganisations();
+    }
+  }, [access]);
+
+  const fetchUser = async () => {
+    console.log("fetchUser started");
+    const response = await axios.get(`${serverUrl}/user/${userId}/access`);
+    console.log("fetchUser response:", response);
+    if (response.status === 200) {
+      setAccess(response.data);
+    }
+  };
+
+  const fetchOrganisations = async () => {
     const orgs: OrganisationModel[] = [];
-    for (const accessObject of user?.access || []) {
+    console.log("access:", access);
+    for (const accessObject of access || []) {
       const organisation = await fetchOrganisation(accessObject.organisationId);
       if (organisation) {
         orgs.push(organisation);
@@ -27,7 +60,9 @@ const EditOrganisationsMenu: React.FC = () => {
   };
 
   const fetchOrganisation = async (id: string) => {
+    console.log("fetchOrganisation started");
     const response = await axios.get(`${serverUrl}/org/${id}`);
+    console.log("fetchOrganisation response:", response);
     if (response.status === 200) {
       return response.data.Item;
     } else {

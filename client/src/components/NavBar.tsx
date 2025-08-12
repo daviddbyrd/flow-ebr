@@ -3,7 +3,7 @@ import { useAuth } from "../context/AuthContext";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
-  const { setUser, setIsLoggedIn } = useAuth();
+  const { setUserId, setIsLoggedIn } = useAuth();
 
   const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
     navigate(`/home/${e.currentTarget.name}`, { replace: true });
@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
 
   const logOut = () => {
     localStorage.removeItem("token");
-    setUser(null);
+    setUserId(null);
     setIsLoggedIn(false);
   };
 

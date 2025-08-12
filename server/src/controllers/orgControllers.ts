@@ -46,16 +46,18 @@ export const createOrganisation = async (req: Request, res: Response) => {
   const isUnique = await isUniqueOrganisationName(name);
   if (isUnique) {
     const organisationId = uuidv4();
+    console.log("1");
     await addOrganisation({
       organisationId,
       name,
     });
-
+    console.log("2");
     await addUserAccess({
       userId: userId,
       organisationId: organisationId,
       role: "admin",
     });
+    console.log("3");
     res.status(201).json({ organisationId });
   } else {
     res.status(409).json({ error: "Organisation name is already taken." });

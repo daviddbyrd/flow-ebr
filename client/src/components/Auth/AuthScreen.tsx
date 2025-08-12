@@ -11,7 +11,7 @@ const AuthScreen: React.FC = () => {
     email: "",
     password: "",
   });
-  const { setUser, setIsLoggedIn } = useAuth();
+  const { setUserId, setIsLoggedIn } = useAuth();
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +30,7 @@ const AuthScreen: React.FC = () => {
       const token = response.data.token;
       localStorage.setItem("token", token);
       const decoded = jwtDecode<User>(token);
-      setUser(decoded);
+      setUserId(decoded.userId);
       setIsLoggedIn(true);
     }
   };

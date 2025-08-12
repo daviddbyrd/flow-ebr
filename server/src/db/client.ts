@@ -5,6 +5,7 @@ import {
   ScanCommand,
   QueryCommand,
   UpdateCommand,
+  GetCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 export const client = new DynamoDBClient({
@@ -46,12 +47,9 @@ export const getUserById = async ({ userId }: { userId: string }) => {
       userId: userId,
     },
   };
-  const response = await docClient.send(new QueryCommand(params));
-  if (response.Count && response.Items) {
-    return response.Items[0];
-  } else {
-    return null;
-  }
+  const response = await docClient.send(new GetCommand(params));
+  console.log("reponse:", response);
+  return response.Item;
 };
 
 export const getUserByEmail = async ({ email }: { email: string }) => {
