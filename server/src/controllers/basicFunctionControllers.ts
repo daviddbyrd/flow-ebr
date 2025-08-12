@@ -95,7 +95,7 @@ export const updateBasicFunction = async (req: Request, res: Response) => {
 export const editBasicFunction = async (req: Request, res: Response) => {
   const { basicFunction } = req.body;
   await addBasicFunction(basicFunction);
-  res.status(200);
+  res.status(200).send();
 };
 
 const addBasicFunction = async (basicFunction: SpecifiedBasicFunctionModel) => {
