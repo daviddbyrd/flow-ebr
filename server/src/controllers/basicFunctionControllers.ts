@@ -56,14 +56,8 @@ type SpecifiedBasicFunctionModel =
   | TextEntryModel;
 
 export const createBasicFunction = async (req: Request, res: Response) => {
-  const { basicFunction, productionOrderId } = req.body;
-  console.log(
-    "basic function: ",
-    basicFunction,
-    "productionOrderId: ",
-    productionOrderId
-  );
-  basicFunction["productionOrderId"] = productionOrderId;
+  const { basicFunction } = req.body;
+  basicFunction["productionOrderId"] = basicFunction.productionOrderId;
   const basicFunctionId = uuidv4();
   basicFunction["basicFunctionId"] = basicFunctionId;
   await addBasicFunction(basicFunction);

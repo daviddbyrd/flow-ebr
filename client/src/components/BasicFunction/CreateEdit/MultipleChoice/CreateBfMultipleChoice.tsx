@@ -1,7 +1,6 @@
 import type { MultipleChoiceModel } from "../CreateBasicFunction";
 import CreateOptions from "./CreateOptions";
 import type { OptionModel } from "../CreateBasicFunction";
-import { useState, useEffect } from "react";
 import type { SetStateAction } from "react";
 
 interface CreateBfMultipleChoiceProps {
