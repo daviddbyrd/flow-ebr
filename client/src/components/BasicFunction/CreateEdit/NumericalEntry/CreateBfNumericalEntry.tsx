@@ -1,7 +1,12 @@
-import type { NumericalEntryModel } from "../CreateBasicFunction";
+import type {
+  NumericalEntryModel,
+  SpecifiedBasicFunctionModel,
+} from "../CreateBasicFunction";
+import type { SetStateAction } from "react";
 
 interface CreateBfNumericalEntryProps {
   basicFunction: NumericalEntryModel;
+  setBasicFunction: React.Dispatch<SetStateAction<SpecifiedBasicFunctionModel>>;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
@@ -9,8 +14,19 @@ interface CreateBfNumericalEntryProps {
 
 const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
   basicFunction,
+  setBasicFunction,
   handleChange,
 }) => {
+  const handleChangeNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const parsedValue = value === "" ? null : Number(value);
+    console.log(parsedValue);
+    // Here I want to check if parsedValue is a number
+    if (!Number.isNaN(parsedValue)) {
+      setBasicFunction((prev) => ({ ...prev, [e.target.name]: parsedValue }));
+    }
+  };
+
   return (
     <>
       <input
@@ -34,7 +50,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         name="min"
         placeholder="Min value"
         value={basicFunction.min}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => handleChangeNumber(e)}
         className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none"
       />
       <input
@@ -42,7 +58,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         name="max"
         placeholder="Max value"
         value={basicFunction.max}
-        onChange={(e) => handleChange(e)}
+        onChange={(e) => handleChangeNumber(e)}
         className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none"
       />
     </>

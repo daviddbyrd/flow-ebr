@@ -1,4 +1,4 @@
-import type { OptionModel } from "../CreateEdit/CreateBasicFunction";
+import type { OptionModel } from "../../CreateEdit/CreateBasicFunction";
 
 interface ExecuteOptionsBoxProps {
   option: OptionModel;

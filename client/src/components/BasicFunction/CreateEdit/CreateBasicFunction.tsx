@@ -5,6 +5,7 @@ import CreateBfNumericalEntry from "./NumericalEntry/CreateBfNumericalEntry";
 import CreateBfTextEntry from "./TextEntry/CreateBfTextEntry";
 import CreatePrerequisites from "./CreatePrerequisites";
 import { useParams, useNavigate } from "react-router-dom";
+import type { SetStateAction } from "react";
 
 const basicFunctionTypes = [
   "multipleChoice",
@@ -39,6 +40,7 @@ export interface MultipleChoiceModel extends BasicFunctionModel {
 
 export interface NumericalEntryModel extends BasicFunctionModel {
   type: "numericalEntry";
+  entry: number | null;
   min?: number;
   max?: number;
 }
@@ -121,6 +123,7 @@ const CreateBasicFunction: React.FC = () => {
           basicFunctionId: "new",
           name: "",
           type,
+          entry: null,
           prerequisites: [],
           isComplete: false,
           isSuccess: false,
@@ -195,6 +198,11 @@ const CreateBasicFunction: React.FC = () => {
           <CreateBfNumericalEntry
             basicFunction={basicFunction}
             handleChange={handleChange}
+            setBasicFunction={
+              setBasicFunction as React.Dispatch<
+                SetStateAction<SpecifiedBasicFunctionModel>
+              >
+            }
           />
         );
       case "textEntry":

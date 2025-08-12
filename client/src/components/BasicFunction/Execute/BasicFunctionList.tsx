@@ -23,7 +23,7 @@ const BasicFunctionList: React.FC = () => {
     const response = await axios.get(
       `${serverUrl}/production-order/${productionOrderId}/basic-functions`
     );
-    console.log(response);
+    console.log("response:", response);
     if (response.status === 200) {
       setBasicFunctions(response.data);
     }

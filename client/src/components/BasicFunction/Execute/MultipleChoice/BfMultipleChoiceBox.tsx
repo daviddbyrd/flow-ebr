@@ -1,7 +1,7 @@
 import type {
   MultipleChoiceModel,
   SpecifiedBasicFunctionModel,
-} from "../CreateEdit/CreateBasicFunction";
+} from "../../CreateEdit/CreateBasicFunction";
 import ExecuteOptionBox from "./ExecuteOptionBox";
 
 interface BasicFunctionBoxProps {
