@@ -29,15 +29,15 @@ const CreateOptions: React.FC<CreateOptionsProps> = ({
 
   return (
     <>
-      <div className="w-80 h-12 flex-shrink-0 flex flex-row justify-between my-4">
+      <div className="h-12 w-3/10 flex-shrink-0 flex flex-row justify-between my-4">
         <input
           onChange={(e) => handleChange(e)}
-          className="w-60 h-12 text-lg border border-gray-200 rounded-lg shadow-sm pl-3 focus:outline-none"
+          className="h-12 w-6/10 text-lg border border-gray-200 rounded-lg shadow-sm pl-3 focus:outline-none"
           value={newOption.name}
           placeholder="Option"
         />
         <button
-          className="w-16 h-12 font-bold text-md border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg cursor-pointer shadow-sm"
+          className="h-12 w-3/10 font-bold text-md border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg cursor-pointer shadow-sm"
           onClick={() => handleAdd()}
         >
           + Add

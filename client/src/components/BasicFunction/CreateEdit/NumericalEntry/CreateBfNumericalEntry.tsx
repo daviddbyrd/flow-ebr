@@ -19,7 +19,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         placeholder="Basic function name"
         value={basicFunction.name}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none"
       />
       <input
         type="text"
@@ -27,7 +27,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         placeholder="Prompt"
         value={basicFunction.prompt}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none"
       />
       <input
         type="text"
@@ -35,7 +35,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         placeholder="Min value"
         value={basicFunction.min}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none"
       />
       <input
         type="text"
@@ -43,7 +43,7 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
         placeholder="Max value"
         value={basicFunction.max}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none"
       />
     </>
   );

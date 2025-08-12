@@ -211,13 +211,11 @@ const CreateBasicFunction: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-start pt-5">
-      <div className="font-bold">Basic function type</div>
-
       <select
         name="type"
         value={basicFunction?.type ?? ""}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 flex-shrink-0 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 flex-shrink-0 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
       >
         <option value="" disabled>
           Select basic function type
@@ -232,7 +230,7 @@ const CreateBasicFunction: React.FC = () => {
       {specifiedBasicFunctionForm()}
 
       {error && (
-        <div className="w-80 h-12 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
+        <div className="h-12 w-3/10 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
           {error}
         </div>
       )}
@@ -245,7 +243,7 @@ const CreateBasicFunction: React.FC = () => {
       )}
 
       <button
-        className="w-80 h-12 flex-shrink-0 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-4 cursor-pointer shadow-sm"
+        className="h-12 w-3/10 flex-shrink-0 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-4 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
         Create Basic Function

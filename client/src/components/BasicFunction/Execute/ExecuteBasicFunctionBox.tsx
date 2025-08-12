@@ -44,7 +44,7 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
       {isExpanded ? (
         <div
           className={classNames(
-            "flex flex-col w-6/10 items-center m-5 p-5 border border-gray-200 rounded-md cursor-pointer",
+            "flex flex-col w-6/10 items-center mt-5 p-5 border border-gray-200 rounded-md cursor-pointer",
             {
               "bg-green-200": basicFunction.isSuccess,
               "bg-red-200":
@@ -87,7 +87,7 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
       ) : (
         <div
           className={classNames(
-            "flex flex-row items-center h-16 w-6/10 m-5 p-5 border border-gray-200 rounded-md hover:brightness-90 cursor-pointer",
+            "flex flex-row items-center h-16 w-6/10 mt-5 p-5 border border-gray-200 rounded-md hover:brightness-90 cursor-pointer",
             {
               "bg-green-200": basicFunction.isSuccess,
               "bg-red-200":

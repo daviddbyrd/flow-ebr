@@ -25,7 +25,7 @@ const CreateOptionBox: React.FC<CreateOptionBoxProps> = ({
 
   return (
     <div
-      className={`w-80 h-16 flex-shrink-0 rounded-lg border border-gray-200 flex flex-row items-center justify-start my-2 ${
+      className={`h-16 w-3/10 flex-shrink-0 rounded-lg border border-gray-200 flex flex-row items-center justify-start my-2 ${
         option.isSuccess && "bg-green-100"
       }`}
     >

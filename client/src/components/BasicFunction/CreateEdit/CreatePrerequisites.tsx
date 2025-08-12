@@ -43,12 +43,12 @@ const CreatePrerequisites: React.FC<CreatePrerequisitesProps> = ({
 
   return (
     <>
-      <div className="w-80 h-12 flex-shrink-0 flex flex-row justify-between my-4">
+      <div className="h-12 w-3/10 flex-shrink-0 flex flex-row justify-between my-4">
         <select
           name="type"
           value=""
           onChange={(e) => addPrerequisite(e)}
-          className="w-80 h-12 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
+          className="h-12 w-full text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
         >
           <option value="" disabled>
             Select prerequisites
