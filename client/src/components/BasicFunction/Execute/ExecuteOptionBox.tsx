@@ -1,18 +1,22 @@
-import type { OptionModel } from "./CreateBasicFunction";
-import { AiOutlineClose } from "react-icons/ai";
+import type { OptionModel } from "../CreateEdit/CreateBasicFunction";
 
 interface ExecuteOptionsBoxProps {
   option: OptionModel;
   selectedOption: string | null;
   setSelectedOption: (selectedOption: string | null) => void;
+  isUnlocked: boolean;
 }
 
 const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
+  isUnlocked,
   option,
   selectedOption,
   setSelectedOption,
 }) => {
   const handleChange = () => {
+    if (!isUnlocked) {
+      return;
+    }
     if (option.name === selectedOption) {
       setSelectedOption(null);
     } else {
@@ -22,7 +26,7 @@ const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
 
   return (
     <div
-      className={`w-80 h-16 rounded-lg border border-gray-200 flex flex-row items-center justify-start my-2 ${
+      className={`w-full h-16 rounded-lg border border-gray-200 bg-white flex flex-row items-center justify-start my-2 ${
         selectedOption === option.name && "bg-gray-100"
       }`}
       onClick={(e) => e.stopPropagation()}

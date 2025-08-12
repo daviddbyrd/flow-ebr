@@ -23,6 +23,7 @@ interface BasicFunctionModel {
   prerequisites: string[];
   isComplete: boolean;
   isSuccess: boolean;
+  isUnlocked: boolean;
 }
 
 export interface OptionModel {
@@ -112,6 +113,7 @@ const CreateBasicFunction: React.FC = () => {
           isComplete: false,
           isSuccess: false,
           selectedOption: null,
+          isUnlocked: true,
         };
       case "numericalEntry":
         return {
@@ -122,6 +124,7 @@ const CreateBasicFunction: React.FC = () => {
           prerequisites: [],
           isComplete: false,
           isSuccess: false,
+          isUnlocked: true,
         };
       case "textEntry":
         return {
@@ -133,6 +136,7 @@ const CreateBasicFunction: React.FC = () => {
           prerequisites: [],
           isComplete: false,
           isSuccess: false,
+          isUnlocked: true,
         };
       default:
         throw new Error(`Unsupported type: ${type}`);

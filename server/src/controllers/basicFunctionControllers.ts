@@ -60,6 +60,9 @@ export const createBasicFunction = async (req: Request, res: Response) => {
   basicFunction["productionOrderId"] = basicFunction.productionOrderId;
   const basicFunctionId = uuidv4();
   basicFunction["basicFunctionId"] = basicFunctionId;
+  if (basicFunction.prerequisites.length > 0) {
+    basicFunction["isUnlocked"] = false;
+  }
   await addBasicFunction(basicFunction);
   res.status(201).json({ basicFunctionId });
 };
