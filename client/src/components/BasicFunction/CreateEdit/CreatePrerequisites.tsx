@@ -43,7 +43,7 @@ const CreatePrerequisites: React.FC<CreatePrerequisitesProps> = ({
 
   return (
     <>
-      <div className="w-80 h-12 flex flex-row justify-between my-4">
+      <div className="w-80 h-12 flex-shrink-0 flex flex-row justify-between my-4">
         <select
           name="type"
           value=""

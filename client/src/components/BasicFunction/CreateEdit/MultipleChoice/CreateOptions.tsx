@@ -29,7 +29,7 @@ const CreateOptions: React.FC<CreateOptionsProps> = ({
 
   return (
     <>
-      <div className="w-80 h-12 flex flex-row justify-between my-4">
+      <div className="w-80 h-12 flex-shrink-0 flex flex-row justify-between my-4">
         <input
           onChange={(e) => handleChange(e)}
           className="w-60 h-12 text-lg border border-gray-200 rounded-lg shadow-sm pl-3 focus:outline-none"
