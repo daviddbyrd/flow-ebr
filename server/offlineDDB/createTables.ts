@@ -15,11 +15,25 @@ const tables: CreateTableCommandInput[] = [
     KeySchema: [{ AttributeName: "organisationId", KeyType: "HASH" }],
     AttributeDefinitions: [
       { AttributeName: "organisationId", AttributeType: "S" },
+      { AttributeName: "name", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5,
     },
+    GlobalSecondaryIndexes: [
+      {
+        IndexName: "NameIndex",
+        KeySchema: [{ AttributeName: "name", KeyType: "HASH" }],
+        Projection: {
+          ProjectionType: "ALL",
+        },
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
+      },
+    ],
   },
   {
     TableName: "FlowEBR_Locations_Dev",
@@ -30,11 +44,25 @@ const tables: CreateTableCommandInput[] = [
     AttributeDefinitions: [
       { AttributeName: "organisationId", AttributeType: "S" },
       { AttributeName: "locationId", AttributeType: "S" },
+      { AttributeName: "name", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5,
     },
+    GlobalSecondaryIndexes: [
+      {
+        IndexName: "NameIndex",
+        KeySchema: [{ AttributeName: "name", KeyType: "HASH" }],
+        Projection: {
+          ProjectionType: "ALL",
+        },
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
+      },
+    ],
   },
   {
     TableName: "FlowEBR_ProcessUnits_Dev",
@@ -45,11 +73,25 @@ const tables: CreateTableCommandInput[] = [
     AttributeDefinitions: [
       { AttributeName: "locationId", AttributeType: "S" },
       { AttributeName: "processUnitId", AttributeType: "S" },
+      { AttributeName: "name", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5,
     },
+    GlobalSecondaryIndexes: [
+      {
+        IndexName: "NameIndex",
+        KeySchema: [{ AttributeName: "name", KeyType: "HASH" }],
+        Projection: {
+          ProjectionType: "ALL",
+        },
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
+      },
+    ],
   },
   {
     TableName: "FlowEBR_ProductionOrders_Dev",
@@ -60,11 +102,25 @@ const tables: CreateTableCommandInput[] = [
     AttributeDefinitions: [
       { AttributeName: "processUnitId", AttributeType: "S" },
       { AttributeName: "productionOrderId", AttributeType: "S" },
+      { AttributeName: "name", AttributeType: "S" },
     ],
     ProvisionedThroughput: {
       ReadCapacityUnits: 5,
       WriteCapacityUnits: 5,
     },
+    GlobalSecondaryIndexes: [
+      {
+        IndexName: "NameIndex",
+        KeySchema: [{ AttributeName: "name", KeyType: "HASH" }],
+        Projection: {
+          ProjectionType: "ALL",
+        },
+        ProvisionedThroughput: {
+          ReadCapacityUnits: 5,
+          WriteCapacityUnits: 5,
+        },
+      },
+    ],
   },
   {
     TableName: "FlowEBR_BasicFunctions_Dev",
