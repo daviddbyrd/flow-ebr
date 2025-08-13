@@ -50,7 +50,7 @@ const OrganisationList: React.FC = () => {
     const response = await axios.get(`${serverUrl}/org/${id}`);
     console.log("fetchOrganisation response:", response);
     if (response.status === 200) {
-      return response.data.Item;
+      return response.data;
     } else {
       return null;
     }
