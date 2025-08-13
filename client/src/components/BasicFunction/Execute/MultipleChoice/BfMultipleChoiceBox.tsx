@@ -4,12 +4,12 @@ import type {
 } from "../../CreateEdit/CreateBasicFunction";
 import ExecuteOptionBox from "./ExecuteOptionBox";
 
-interface BasicFunctionBoxProps {
+interface BfMultipleChoiceBoxProps {
   basicFunction: MultipleChoiceModel;
   setBasicFunction: (newBasicFunction: SpecifiedBasicFunctionModel) => void;
 }
 
-const BfMultipleChoiceBox: React.FC<BasicFunctionBoxProps> = ({
+const BfMultipleChoiceBox: React.FC<BfMultipleChoiceBoxProps> = ({
   basicFunction,
   setBasicFunction,
 }) => {

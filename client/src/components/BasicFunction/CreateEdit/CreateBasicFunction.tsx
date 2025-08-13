@@ -48,6 +48,7 @@ export interface NumericalEntryModel extends BasicFunctionModel {
 
 export interface TextEntryModel extends BasicFunctionModel {
   type: "textEntry";
+  entry: string;
   prompt: string;
 }
 
@@ -138,6 +139,7 @@ const CreateBasicFunction: React.FC = () => {
           basicFunctionId: "new",
           name: "",
           type,
+          entry: "",
           prompt: "",
           prerequisites: [],
           isComplete: false,

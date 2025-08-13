@@ -43,7 +43,7 @@ const BasicFunctionList: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-start">
+    <div className="w-full min-h-screen flex flex-col items-center justify-start">
       {basicFunctions && (
         <div className="w-full flex flex-col items-center">
           {basicFunctions.map((basicFunction) => {
@@ -58,6 +58,7 @@ const BasicFunctionList: React.FC = () => {
           })}
         </div>
       )}
+      <div className="h-20"></div>
     </div>
   );
 };

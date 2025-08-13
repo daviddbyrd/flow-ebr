@@ -2,6 +2,7 @@ import type { SpecifiedBasicFunctionModel } from "../CreateEdit/CreateBasicFunct
 import { useState } from "react";
 import BfMultipleChoiceBox from "./MultipleChoice/BfMultipleChoiceBox";
 import BfNumericalEntryBox from "./NumericalEntry/BfNumericalEntryBox";
+import BfTextEntryBox from "./TextEntry/BfTextEntryBox";
 import MissingPrerequisites from "./MissingPrerequisites";
 import type { Dispatch, SetStateAction } from "react";
 import classNames from "classnames";
@@ -41,6 +42,13 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
       case "numericalEntry":
         return (
           <BfNumericalEntryBox
+            basicFunction={basicFunction}
+            setBasicFunction={setBasicFunction}
+          />
+        );
+      case "textEntry":
+        return (
+          <BfTextEntryBox
             basicFunction={basicFunction}
             setBasicFunction={setBasicFunction}
           />

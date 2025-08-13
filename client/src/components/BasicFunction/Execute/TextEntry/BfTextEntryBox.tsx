@@ -1,23 +1,20 @@
 import type {
-  NumericalEntryModel,
+  TextEntryModel,
   SpecifiedBasicFunctionModel,
 } from "../../CreateEdit/CreateBasicFunction";
 
-interface BfNumericalEntryBoxProps {
-  basicFunction: NumericalEntryModel;
+interface BfTextEntryBoxProps {
+  basicFunction: TextEntryModel;
   setBasicFunction: (newBasicFunction: SpecifiedBasicFunctionModel) => void;
 }
 
-const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
+const BfTextEntryBox: React.FC<BfTextEntryBoxProps> = ({
   basicFunction,
   setBasicFunction,
 }) => {
   const setEntry = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const parsedValue = value === "" ? null : Number(value);
-    if (parsedValue) {
-      setBasicFunction({ ...basicFunction, entry: parsedValue });
-    }
+    setBasicFunction({ ...basicFunction, entry: value });
   };
 
   return (
@@ -28,8 +25,8 @@ const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
       <div className="text-xl">{basicFunction.prompt}</div>
       <input
         type="text"
-        placeholder="Enter value"
-        value={basicFunction.entry as number}
+        placeholder="Enter text"
+        value={basicFunction.entry}
         onChange={(e) => setEntry(e)}
         className="h-12 w-full text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none bg-white"
       />
@@ -37,4 +34,4 @@ const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
   );
 };
 
-export default BfNumericalEntryBox;
+export default BfTextEntryBox;
