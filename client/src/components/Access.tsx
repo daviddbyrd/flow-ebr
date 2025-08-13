@@ -10,11 +10,29 @@ interface AccessFormModel {
   role: "admin" | "user" | "";
 }
 
+export interface GrantAccessProps {
+  username: string;
+  organisationId: string;
+  role: "admin" | "user" | "";
+}
+
 const emptyAccessForm: AccessFormModel = {
   username: "",
   organisationId: "",
   organisationName: "",
   role: "",
+};
+
+export const grantAccess = async ({
+  username,
+  organisationId,
+  role,
+}: GrantAccessProps) => {
+  await axios.post(`${serverUrl}/user/grant-access`, {
+    username,
+    organisationId,
+    role,
+  });
 };
 
 const Access: React.FC = () => {
@@ -52,7 +70,7 @@ const Access: React.FC = () => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${serverUrl}/user/grant-access`, {
+      await grantAccess({
         username: accessForm.username,
         organisationId: accessForm.organisationId,
         role: accessForm.role,
@@ -65,6 +83,18 @@ const Access: React.FC = () => {
         }
       }
     }
+  };
+
+  const grantAccess = async ({
+    username,
+    organisationId,
+    role,
+  }: GrantAccessProps) => {
+    await axios.post(`${serverUrl}/user/grant-access`, {
+      username,
+      organisationId,
+      role,
+    });
   };
 
   return (

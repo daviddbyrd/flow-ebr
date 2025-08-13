@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 export const getOrganisationRoute = async (req: Request, res: Response) => {
   const { organisationId } = req.params;
-  const organisation = getOrganisation(organisationId);
+  const organisation = await getOrganisation(organisationId);
   res.status(200).json(organisation);
 };
 

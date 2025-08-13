@@ -4,7 +4,8 @@ import {
   getUser,
   getAccess,
   getAdminOrganisations,
-  grantAccess,
+  grantAccessByUsername,
+  grantAccessByUserId,
 } from "../controllers/userController";
 
 const router = express.Router();
@@ -12,6 +13,7 @@ const router = express.Router();
 router.get("/:userId", asyncHandler(getUser));
 router.get("/:userId/access", asyncHandler(getAccess));
 router.get("/:userId/admin-organisations", asyncHandler(getAdminOrganisations));
-router.post("/grant-access", asyncHandler(grantAccess));
+router.post("/grant-access", asyncHandler(grantAccessByUsername));
+router.post("/:userId/grant-access", asyncHandler(grantAccessByUserId));
 
 export default router;

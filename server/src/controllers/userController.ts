@@ -38,14 +38,45 @@ export const getAdminOrganisations = async (req: Request, res: Response) => {
   res.status(200).json(organisations);
 };
 
-export const grantAccess = async (req: Request, res: Response) => {
+export const grantAccessByUsername = async (req: Request, res: Response) => {
   const { username, organisationId, role } = req.body;
   const user = await getUserByUsername({ username });
+  await grantAccess({
+    userId: user?.userId,
+    organisationId: organisationId,
+    role: role,
+  });
+  res.status(200).send();
+};
+
+export const grantAccessByUserId = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  const { organisationId, role } = req.body;
+
+  await grantAccess({
+    userId,
+    organisationId,
+    role,
+  });
+  res.status(200).send();
+};
+
+interface GrantAccessProps {
+  userId: string;
+  organisationId: string;
+  role: "admin" | "user";
+}
+
+const grantAccess = async ({
+  userId,
+  organisationId,
+  role,
+}: GrantAccessProps) => {
   const params = {
     TableName: process.env.USERS_TABLE,
-    Key: { userId: user?.userId },
+    Key: { userId: userId },
     UpdateExpression:
-      "SET myList = list_append(if_not_exists(myList, :empty_list), :new_items)",
+      "SET access = list_append(if_not_exists(access, :empty_list), :new_items)",
     ExpressionAttributeValues: {
       ":new_items": [{ organisationId: organisationId, role: role }],
       ":empty_list": [],
@@ -53,5 +84,5 @@ export const grantAccess = async (req: Request, res: Response) => {
   };
 
   await docClient.send(new UpdateCommand(params));
-  res.status(200).send();
+  return;
 };

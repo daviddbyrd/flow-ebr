@@ -3,6 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import axios from "axios";
 
+interface GrantAccessProps {
+  userId: string;
+  organisationId: string;
+  role: "admin" | "user";
+}
+
 const CreateOrganisation: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const [name, setName] = useState<string>("");
@@ -20,8 +26,19 @@ const CreateOrganisation: React.FC = () => {
         name: name,
         userId: userId,
       });
+      console.log("hello paul");
       if (response.data.organisationId) {
-        navigate("/home/edit/organisation/", { state: { refresh: true } });
+        if (userId) {
+          console.log("goodbye john");
+          await grantAccess({
+            userId: userId,
+            organisationId: response.data.organisationId,
+            role: "admin",
+          });
+        }
+        await navigate("/home/edit/organisation/", {
+          state: { refresh: true },
+        });
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -30,6 +47,18 @@ const CreateOrganisation: React.FC = () => {
         }
       }
     }
+  };
+
+  const grantAccess = async ({
+    userId,
+    organisationId,
+    role,
+  }: GrantAccessProps) => {
+    await axios.post(`${serverUrl}/user/${userId}/grant-access`, {
+      organisationId,
+      role,
+    });
+    console.log("Called grant Access with: ", userId, organisationId, role);
   };
 
   return (
