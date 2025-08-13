@@ -7,6 +7,7 @@ import {
   GetCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { v4 as uuidv4 } from "uuid";
+import { getBasicFunctions } from "./productionOrderControllers";
 
 const basicFunctionTypes = [
   "multipleChoice",
@@ -269,16 +270,4 @@ const setMissingPrerequisites = async (
     },
   };
   const response = await docClient.send(new UpdateCommand(params));
-};
-
-const getBasicFunctions = async (productionOrderId: string) => {
-  const params = {
-    TableName: process.env.BASIC_FUNCTIONS_TABLE,
-    KeyConditionExpression: "productionOrderId = :poId",
-    ExpressionAttributeValues: {
-      ":poId": productionOrderId,
-    },
-  };
-  const response = await docClient.send(new QueryCommand(params));
-  return response.Items;
 };
