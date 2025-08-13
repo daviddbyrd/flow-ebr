@@ -21,7 +21,6 @@ const CreateBfNumericalEntry: React.FC<CreateBfNumericalEntryProps> = ({
     const value = e.target.value;
     const parsedValue = value === "" ? null : Number(value);
     console.log(parsedValue);
-    // Here I want to check if parsedValue is a number
     if (!Number.isNaN(parsedValue)) {
       setBasicFunction((prev) => ({ ...prev, [e.target.name]: parsedValue }));
     }

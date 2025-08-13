@@ -19,7 +19,7 @@ const CreateBfTextEntry: React.FC<CreateBfTextEntryProps> = ({
         placeholder="Basic function name"
         value={basicFunction.name}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
       <input
         type="text"
@@ -27,7 +27,7 @@ const CreateBfTextEntry: React.FC<CreateBfTextEntryProps> = ({
         placeholder="Prompt"
         value={basicFunction.prompt}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg my-4 shadow-sm pl-3 focus:outline-none"
       />
     </>
   );
