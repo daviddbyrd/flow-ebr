@@ -34,22 +34,22 @@ const CreateProcessUnit: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-full h-full flex flex-col items-center justify-start">
       <input
         type="text"
         name="name"
         placeholder="Enter process unit name"
         value={name}
         onChange={(e) => handleChange(e)}
-        className="w-80 h-12 text-lg border border-gray-200 rounded-lg my-8 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-8 shadow-sm pl-3 focus:outline-none"
       />
       {error && (
-        <div className="w-80 h-12 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
+        <div className="h-12 w-3/10 text-md border border-gray-200 rounded-lg shadow-md pl-3 bg-red-100 text-red-700 flex items-center justify-center">
           {error}
         </div>
       )}
       <button
-        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-8 cursor-pointer shadow-sm"
+        className="h-12 w-3/10 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg mt-8 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
         Create Process Unit
