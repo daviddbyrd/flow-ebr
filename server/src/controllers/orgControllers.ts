@@ -3,16 +3,10 @@ import { docClient, addUserAccess } from "../db/client";
 import { GetCommand, QueryCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { v4 as uuidv4 } from "uuid";
 
-export const getOrganisation = async (req: Request, res: Response) => {
+export const getOrganisationRoute = async (req: Request, res: Response) => {
   const { organisationId } = req.params;
-  const params = {
-    TableName: process.env.ORGANISATIONS_TABLE,
-    Key: {
-      organisationId: organisationId,
-    },
-  };
-  const response = await docClient.send(new GetCommand(params));
-  res.status(200).json(response);
+  const organisation = getOrganisation(organisationId);
+  res.status(200).json(organisation);
 };
 
 export const getLocations = async (req: Request, res: Response) => {
@@ -62,6 +56,17 @@ export const createOrganisation = async (req: Request, res: Response) => {
   } else {
     res.status(409).json({ error: "Organisation name is already taken." });
   }
+};
+
+export const getOrganisation = async (organisationId: string) => {
+  const params = {
+    TableName: process.env.ORGANISATIONS_TABLE,
+    Key: {
+      organisationId: organisationId,
+    },
+  };
+  const response = await docClient.send(new GetCommand(params));
+  return response.Item;
 };
 
 const isUniqueOrganisationName = async (name: string) => {

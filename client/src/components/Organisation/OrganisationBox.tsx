@@ -1,4 +1,4 @@
-import type { OrganisationModel } from "./OrganisationList";
+import type { OrganisationModel } from "./EditOrganisationsMenu";
 
 interface OrganisationBoxProps {
   organisation: OrganisationModel;

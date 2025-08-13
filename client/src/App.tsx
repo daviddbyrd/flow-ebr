@@ -30,7 +30,7 @@ import CreateProductionOrder from "./components/ProductionOrder/CreateProduction
 import EditProductionOrder from "./components/ProductionOrder/EditProductionOrder";
 import EditProductionOrderMenu from "./components/ProductionOrder/EditProductionOrderMenu";
 import CreateBasicFunction from "./components/BasicFunction/CreateEdit/CreateBasicFunction";
-import EditBasicFunction from "./components/BasicFunction/CreateEdit/EditBasicFunction";
+import Access from "./components/Access";
 import AuthScreenRedirect from "./utils/AuthScreenRedirect";
 import RequireLoggedIn from "./utils/RequireLoggedIn";
 import { AuthProvider } from "./context/AuthContext";
@@ -120,6 +120,8 @@ const App: React.FC = () => {
                 </Route>
               </Route>
             </Route>
+
+            <Route path="access" element={<Access />} />
           </Route>
 
           <Route path="/" element={<AuthScreenRedirect />} />

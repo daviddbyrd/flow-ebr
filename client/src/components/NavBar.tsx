@@ -33,6 +33,13 @@ const NavBar: React.FC = () => {
         Create/Edit
       </button>
       <button
+        name="access"
+        onClick={(e) => handleNavigate(e)}
+        className="ml-32 cursor-pointer text-lg text-gray-600"
+      >
+        Access
+      </button>
+      <button
         onClick={logOut}
         className="ml-32 cursor-pointer text-lg text-gray-600 text-red-500 ml-auto mr-10"
       >
