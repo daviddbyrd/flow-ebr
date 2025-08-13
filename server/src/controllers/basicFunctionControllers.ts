@@ -89,10 +89,11 @@ export const updateBasicFunction = async (req: Request, res: Response) => {
   await addBasicFunction(basicFunction);
   if (checkForChange(basicFunction, oldBasicFunction)) {
     await updateUnlockedStatus(basicFunction.productionOrderId);
-    res.status(200).json({ change: true });
-  } else {
-    res.status(200).json({ change: false });
   }
+  const basicFunctions = await getBasicFunctions(
+    basicFunction.productionOrderId
+  );
+  res.status(200).json(basicFunctions);
 };
 
 export const editBasicFunction = async (req: Request, res: Response) => {
@@ -206,8 +207,10 @@ const updateUnlockedStatus = async (productionOrderId: string) => {
   for (const basicFunction of response.Items ?? []) {
     const missingPrerequisites = [];
     for (const preRequisiteId of basicFunction.prerequisites) {
-      if (!basicFunctions.preRequisiteId.isSuccess) {
-        missingPrerequisites.push(basicFunctions.prerequisiteId.name);
+      if (!basicFunctions[preRequisiteId as string]?.isSuccess) {
+        missingPrerequisites.push(
+          basicFunctions[preRequisiteId as string]?.name ?? ""
+        );
       }
     }
     const isUnlocked = missingPrerequisites.length === 0;
@@ -229,8 +232,8 @@ const setUnlocked = async (
   const params = {
     TableName: process.env.BASIC_FUNCTIONS_TABLE,
     Key: {
-      PrimaryKey: basicFunction.productionOrderId,
-      SortKey: basicFunction.basicFunctionId,
+      productionOrderId: basicFunction.productionOrderId,
+      basicFunctionId: basicFunction.basicFunctionId,
     },
     UpdateExpression: "SET #attrName = :attrValue",
     ExpressionAttributeNames: {
@@ -250,16 +253,28 @@ const setMissingPrerequisites = async (
   const params = {
     TableName: process.env.BASIC_FUNCTIONS_TABLE,
     Key: {
-      PrimaryKey: basicFunction.productionOrderId,
-      SortKey: basicFunction.basicFunctionId,
+      productionOrderId: basicFunction.productionOrderId,
+      basicFunctionId: basicFunction.basicFunctionId,
     },
     UpdateExpression: "SET #attrName = :attrValue",
     ExpressionAttributeNames: {
       "#attrName": "missingPrerequisites",
     },
     ExpressionAttributeValues: {
-      "#attrValue": missingPrerequisites,
+      ":attrValue": missingPrerequisites,
     },
   };
   const response = await docClient.send(new UpdateCommand(params));
+};
+
+const getBasicFunctions = async (productionOrderId: string) => {
+  const params = {
+    TableName: process.env.BASIC_FUNCTIONS_TABLE,
+    KeyConditionExpression: "productionOrderId = :poId",
+    ExpressionAttributeValues: {
+      ":poId": productionOrderId,
+    },
+  };
+  const response = await docClient.send(new QueryCommand(params));
+  return response.Items;
 };

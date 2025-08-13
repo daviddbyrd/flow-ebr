@@ -33,10 +33,13 @@ const BasicFunctionList: React.FC = () => {
     newBasicFunction: SpecifiedBasicFunctionModel
   ) => {
     console.log("submitted basic function: ", newBasicFunction);
-    await axios.post(`${serverUrl}/basic-function/update`, {
+    const response = await axios.post(`${serverUrl}/basic-function/update`, {
       basicFunction: newBasicFunction,
     });
-    fetchBasicFunctions();
+    console.log("response to handleSubmit;", response);
+    if (response.status === 200) {
+      setBasicFunctions(response.data);
+    }
   };
 
   return (
