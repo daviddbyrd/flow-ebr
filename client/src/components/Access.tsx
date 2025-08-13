@@ -23,18 +23,6 @@ const emptyAccessForm: AccessFormModel = {
   role: "",
 };
 
-export const grantAccess = async ({
-  username,
-  organisationId,
-  role,
-}: GrantAccessProps) => {
-  await axios.post(`${serverUrl}/user/grant-access`, {
-    username,
-    organisationId,
-    role,
-  });
-};
-
 const Access: React.FC = () => {
   const serverUrl = import.meta.env.VITE_SERVER;
   const [accessForm, setAccessForm] =
