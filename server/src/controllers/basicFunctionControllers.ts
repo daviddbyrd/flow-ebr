@@ -64,6 +64,7 @@ export const createBasicFunction = async (req: Request, res: Response) => {
     basicFunction["isUnlocked"] = false;
   }
   await addBasicFunction(basicFunction);
+  await updateUnlockedStatus(basicFunction.productionOrderId);
   res.status(201).json({ basicFunctionId });
 };
 
@@ -198,19 +199,22 @@ const updateUnlockedStatus = async (productionOrderId: string) => {
     {};
 
   for (const basicFunction of response.Items ?? []) {
-    basicFunctions[basicFunction.basicFunctionId] = {
-      isSuccess: basicFunction.isSuccess,
-      name: basicFunction.name,
-    };
+    basicFunctions[basicFunction.basicFunctionId] = basicFunction.isSuccess;
   }
+
+  console.log("basicFunctions:", basicFunctions);
 
   for (const basicFunction of response.Items ?? []) {
     const missingPrerequisites = [];
-    for (const preRequisiteId of basicFunction.prerequisites) {
-      if (!basicFunctions[preRequisiteId as string]?.isSuccess) {
-        missingPrerequisites.push(
-          basicFunctions[preRequisiteId as string]?.name ?? ""
-        );
+    console.log(
+      "basicFunctionid:",
+      basicFunction.basicFunctionId,
+      "prerequisites:",
+      basicFunction.prerequisites
+    );
+    for (const prerequisite of basicFunction.prerequisites) {
+      if (!basicFunctions[prerequisite as string]) {
+        missingPrerequisites.push(prerequisite);
       }
     }
     const isUnlocked = missingPrerequisites.length === 0;

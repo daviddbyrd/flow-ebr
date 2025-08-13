@@ -2,6 +2,7 @@ import type { SpecifiedBasicFunctionModel } from "../CreateEdit/CreateBasicFunct
 import { useState } from "react";
 import BfMultipleChoiceBox from "./MultipleChoice/BfMultipleChoiceBox";
 import BfNumericalEntryBox from "./NumericalEntry/BfNumericalEntryBox";
+import MissingPrerequisites from "./MissingPrerequisites";
 import type { Dispatch, SetStateAction } from "react";
 import classNames from "classnames";
 
@@ -79,7 +80,13 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
               )}
             </div>
           </div>
-          {renderContent()}
+          {basicFunction.isUnlocked ? (
+            renderContent()
+          ) : (
+            <MissingPrerequisites
+              missingPrerequisites={basicFunction.missingPrerequisites}
+            />
+          )}
           <div className="flex flow-row w-full items-center justify-between pt-3">
             <button className="bg-red-300 h-12 w-20 rounded-md cursor-pointer">
               Cancel
