@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
+import HomePage from "./components/HomePage";
 import Organisations from "./components/Organisation/Organisations";
 import OrganisationList from "./components/Organisation/OrganisationList";
 import Organisation from "./components/Organisation/Organisation";
@@ -48,6 +49,7 @@ const App: React.FC = () => {
               </RequireLoggedIn>
             }
           >
+            <Route index element={<HomePage />} />
             <Route path="execute/organisation" element={<Organisations />}>
               <Route index element={<OrganisationList />} />
               <Route path=":organisationId" element={<Organisation />}>
