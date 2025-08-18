@@ -42,20 +42,53 @@ const BasicFunctionList: React.FC = () => {
     }
   };
 
+  const handleChange = async (basicFunction: SpecifiedBasicFunctionModel) => {
+    switch (basicFunction.type) {
+      case "multipleChoice":
+        await handleSubmit({
+          ...basicFunction,
+          isComplete: false,
+          isSuccess: false,
+          selectedOption: null,
+        });
+        break;
+      case "numericalEntry":
+        await handleSubmit({
+          ...basicFunction,
+          isComplete: false,
+          isSuccess: false,
+          entry: null,
+        });
+        break;
+      case "textEntry":
+        await handleSubmit({
+          ...basicFunction,
+          isComplete: false,
+          isSuccess: false,
+          entry: "",
+        });
+        break;
+    }
+  };
+
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-start">
       {basicFunctions && (
         <div className="w-full flex flex-col items-center">
-          {basicFunctions.map((basicFunction) => {
-            return (
-              <ExecuteBasicFunctionBox
-                key={basicFunction.basicFunctionId}
-                basicFunction={basicFunction}
-                setBasicFunctions={setBasicFunctions}
-                handleSubmit={handleSubmit}
-              />
-            );
-          })}
+          {basicFunctions
+            .slice()
+            .sort((a, b) => a.position - b.position)
+            .map((basicFunction) => {
+              return (
+                <ExecuteBasicFunctionBox
+                  key={basicFunction.basicFunctionId}
+                  basicFunction={basicFunction}
+                  setBasicFunctions={setBasicFunctions}
+                  handleSubmit={handleSubmit}
+                  handleChange={handleChange}
+                />
+              );
+            })}
         </div>
       )}
       <div className="h-20"></div>

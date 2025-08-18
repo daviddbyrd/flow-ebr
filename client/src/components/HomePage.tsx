@@ -22,7 +22,7 @@ const HomePage: React.FC = () => {
         className="h-4/10 w-4/10 font-bold text-7xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-3xl cursor-pointer shadow-sm flex flex-col justify-start items-center pt-10"
         onClick={(e) => handleNavigate(e)}
       >
-        Edit or Create
+        Create
         <img src="/create-edit-icon.png" className="h-40 w-40" />
       </button>
     </div>

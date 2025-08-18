@@ -41,14 +41,14 @@ export interface MultipleChoiceModel extends BasicFunctionModel {
 
 export interface NumericalEntryModel extends BasicFunctionModel {
   type: "numericalEntry";
-  entry: number;
+  entry: number | null;
   min?: number;
   max?: number;
 }
 
 export interface TextEntryModel extends BasicFunctionModel {
   type: "textEntry";
-  entry: string;
+  entry: string | null;
 }
 
 type SpecifiedBasicFunctionModel =
@@ -127,6 +127,9 @@ const updateBasicFunctionStatus = (
 };
 
 const updateMultipleChoiceStatus = (basicFunction: MultipleChoiceModel) => {
+  if (basicFunction.selectedOption === null) {
+    return basicFunction;
+  }
   for (const option of basicFunction.options) {
     if (option.name === basicFunction.selectedOption) {
       if (option.isSuccess) {
@@ -141,6 +144,9 @@ const updateMultipleChoiceStatus = (basicFunction: MultipleChoiceModel) => {
 };
 
 const updateNumericalEntryStatus = (basicFunction: NumericalEntryModel) => {
+  if (basicFunction.entry === null) {
+    return basicFunction;
+  }
   if (
     "min" in basicFunction &&
     typeof basicFunction.min == "number" &&
@@ -161,6 +167,9 @@ const updateNumericalEntryStatus = (basicFunction: NumericalEntryModel) => {
 };
 
 const updateTextEntryStatus = (basicFunction: TextEntryModel) => {
+  if (basicFunction.entry === null) {
+    return basicFunction;
+  }
   if (basicFunction.entry) {
     basicFunction.isSuccess = true;
     basicFunction.isComplete = true;
@@ -200,7 +209,7 @@ const updateUnlockedStatus = async (productionOrderId: string) => {
     {};
 
   for (const basicFunction of response.Items ?? []) {
-    basicFunctions[basicFunction.basicFunctionId] = basicFunction.isSuccess;
+    basicFunctions[basicFunction.name] = basicFunction.isSuccess;
   }
 
   console.log("basicFunctions:", basicFunctions);

@@ -11,12 +11,14 @@ interface BfMultipleChoiceBoxProps {
   basicFunction: SpecifiedBasicFunctionModel;
   setBasicFunctions: Dispatch<SetStateAction<SpecifiedBasicFunctionModel[]>>;
   handleSubmit: (newBasicFunction: SpecifiedBasicFunctionModel) => void;
+  handleChange: (basicFunction: SpecifiedBasicFunctionModel) => void;
 }
 
 const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
   basicFunction,
   setBasicFunctions,
   handleSubmit,
+  handleChange,
 }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -56,6 +58,7 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
     }
   };
 
+
   return (
     <>
       {isExpanded ? (
@@ -74,7 +77,7 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
           }}
         >
           <div className="flex flex-row w-full items-center justify-between">
-            <div className="font-bold">{basicFunction.name}</div>
+            <div className="font-bold mb-4">{basicFunction.name}</div>
             <div className="flex items-center justify-center">
               {!basicFunction.isUnlocked && (
                 <span className="text-2xl">🔒</span>
@@ -95,16 +98,26 @@ const ExecuteBasicFunctionBox: React.FC<BfMultipleChoiceBoxProps> = ({
               missingPrerequisites={basicFunction.missingPrerequisites}
             />
           )}
-          <div className="flex flow-row w-full items-center justify-between pt-3">
+          <div className="flex flow-row w-full items-center justify-between pt-8">
             <button className="bg-red-300 h-12 w-20 rounded-md cursor-pointer">
               Cancel
             </button>
-            <button
-              className="bg-green-300 h-12 w-20 rounded-md cursor-pointer"
-              onClick={() => handleSubmit(basicFunction)}
-            >
-              Submit
-            </button>
+
+            {basicFunction.isComplete ? (
+              <button
+                className="bg-green-300 h-12 w-20 rounded-md cursor-pointer"
+                onClick={() => handleChange(basicFunction)}
+              >
+                Change
+              </button>
+            ) : (
+              <button
+                className="bg-green-300 h-12 w-20 rounded-md cursor-pointer"
+                onClick={() => handleSubmit(basicFunction)}
+              >
+                Submit
+              </button>
+            )}
           </div>
         </div>
       ) : (

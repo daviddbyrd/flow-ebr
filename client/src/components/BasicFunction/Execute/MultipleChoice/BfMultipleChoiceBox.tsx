@@ -22,7 +22,7 @@ const BfMultipleChoiceBox: React.FC<BfMultipleChoiceBoxProps> = ({
       <div className="text-xl">{basicFunction.prompt}</div>
       {basicFunction.options.map((option, ind) => {
         return (
-          <div className="w-8/10">
+          <div className="w-8/10" key={ind}>
             <ExecuteOptionBox
               key={ind}
               isUnlocked={basicFunction.isUnlocked}

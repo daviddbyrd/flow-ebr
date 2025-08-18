@@ -13,11 +13,7 @@ const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
   setBasicFunction,
 }) => {
   const setEntry = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const parsedValue = value === "" ? null : Number(value);
-    if (parsedValue) {
-      setBasicFunction({ ...basicFunction, entry: parsedValue });
-    }
+    setBasicFunction({ ...basicFunction, entry: e.target.value });
   };
 
   return (
@@ -26,6 +22,12 @@ const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
       onClick={(e) => e.stopPropagation()}
     >
       <div className="text-xl">{basicFunction.prompt}</div>
+      {(basicFunction.min !== null || basicFunction.max !== null) && (
+        <div className="flex flex-row justify-around w-full">
+          {basicFunction.min !== null && <div>Min: {basicFunction.min}</div>}
+          {basicFunction.max !== null && <div>Max: {basicFunction.max}</div>}
+        </div>
+      )}
       <input
         type="text"
         placeholder="Enter value"
