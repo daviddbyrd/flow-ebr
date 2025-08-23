@@ -16,7 +16,7 @@ const NavBar: React.FC = () => {
   };
 
   return (
-    <div className="fixed w-full h-12 backdrop-blur flex flex-row justify-left items-center top-0 border-b border-gray-100">
+    <div className="fixed w-full h-12 backdrop-blur flex flex-row justify-left items-center top-0 border-b border-gray-200 shadow-sm">
       <button
         name=""
         onClick={(e) => handleNavigate(e)}
