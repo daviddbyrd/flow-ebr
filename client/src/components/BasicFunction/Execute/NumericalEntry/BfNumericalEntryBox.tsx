@@ -13,9 +13,10 @@ const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
   setBasicFunction,
 }) => {
   const setEntry = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBasicFunction({ ...basicFunction, entry: e.target.value });
+    const value = e.target.value;
+    const numericValue = value === "" ? null : Number(value); // handle empty input gracefully
+    setBasicFunction({ ...basicFunction, entry: numericValue });
   };
-
   return (
     <div
       className="flex flex-col w-8/10 items-center"
@@ -29,8 +30,9 @@ const BfNumericalEntryBox: React.FC<BfNumericalEntryBoxProps> = ({
         </div>
       )}
       <input
-        type="text"
+        type="number"
         placeholder="Enter value"
+        disabled={basicFunction.isComplete}
         value={basicFunction.entry as number}
         onChange={(e) => setEntry(e)}
         className="h-12 w-full text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none bg-white"

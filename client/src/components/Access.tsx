@@ -120,7 +120,7 @@ const Access: React.FC = () => {
         className="h-12 w-3/10 flex-shrink-0 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
       >
         <option value="" disabled>
-          Select role
+          Select Role
         </option>
         <option value="admin">Admin</option>
         <option value="user">User</option>
@@ -135,7 +135,7 @@ const Access: React.FC = () => {
         className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-8 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
-        Create Location
+        Grant Access
       </button>
     </div>
   );

@@ -144,19 +144,22 @@ const updateMultipleChoiceStatus = (basicFunction: MultipleChoiceModel) => {
 };
 
 const updateNumericalEntryStatus = (basicFunction: NumericalEntryModel) => {
+  console.log(basicFunction.entry, typeof basicFunction.entry);
   if (basicFunction.entry === null) {
     return basicFunction;
   }
   if (
     "min" in basicFunction &&
     typeof basicFunction.min == "number" &&
-    basicFunction.entry < basicFunction.min
+    (basicFunction.entry < basicFunction.min ||
+      typeof basicFunction.entry != "number")
   ) {
     basicFunction.isSuccess = false;
   } else if (
     "max" in basicFunction &&
     typeof basicFunction.max == "number" &&
-    basicFunction.entry > basicFunction.max
+    (basicFunction.entry > basicFunction.max ||
+      typeof basicFunction.entry != "number")
   ) {
     basicFunction.isSuccess = false;
   } else {

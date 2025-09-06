@@ -26,6 +26,7 @@ const BfTextEntryBox: React.FC<BfTextEntryBoxProps> = ({
       <input
         type="text"
         placeholder="Enter text"
+        disabled={basicFunction.isComplete}
         value={basicFunction.entry as string}
         onChange={(e) => setEntry(e)}
         className="h-12 w-full text-lg border border-gray-200 rounded-lg mt-5 shadow-sm pl-3 focus:outline-none bg-white"

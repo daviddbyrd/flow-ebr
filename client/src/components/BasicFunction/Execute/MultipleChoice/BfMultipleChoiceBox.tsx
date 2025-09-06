@@ -29,6 +29,7 @@ const BfMultipleChoiceBox: React.FC<BfMultipleChoiceBoxProps> = ({
               option={option}
               selectedOption={basicFunction.selectedOption}
               setSelectedOption={setSelectedOption}
+              isComplete={basicFunction.isComplete}
             ></ExecuteOptionBox>
           </div>
         );

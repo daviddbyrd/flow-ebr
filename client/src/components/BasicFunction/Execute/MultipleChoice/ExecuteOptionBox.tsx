@@ -12,6 +12,7 @@ const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
   option,
   selectedOption,
   setSelectedOption,
+  isComplete,
 }) => {
   const handleChange = () => {
     if (!isUnlocked) {
@@ -34,6 +35,7 @@ const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
       <div className="ml-5">{option.name}</div>
       <input
         className="w-8 h-8 mr-4 ml-auto peer"
+        disabled={isComplete}
         type="checkbox"
         checked={selectedOption === option.name}
         onChange={handleChange}
