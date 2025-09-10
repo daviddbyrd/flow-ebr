@@ -93,13 +93,13 @@ const Access: React.FC = () => {
         placeholder="Enter username"
         value={accessForm.username}
         onChange={(e) => handleChange(e)}
-        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg my-8 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 text-lg border border-gray-200 rounded-lg mt-8 shadow-sm pl-3 focus:outline-none"
       />
       <select
         name="organisationId"
         value={accessForm.organisationId}
         onChange={(e) => handleChange(e)}
-        className="h-12 w-3/10 flex-shrink-0 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 flex-shrink-0 text-lg border border-gray-200 rounded-lg mt-6 shadow-sm pl-3 focus:outline-none"
       >
         <option value="" disabled>
           Select Organisation
@@ -117,7 +117,7 @@ const Access: React.FC = () => {
         name="role"
         value={accessForm.role}
         onChange={(e) => handleChange(e)}
-        className="h-12 w-3/10 flex-shrink-0 text-lg border border-gray-200 rounded-lg mb-4 mt-2 shadow-sm pl-3 focus:outline-none"
+        className="h-12 w-3/10 flex-shrink-0 text-lg border border-gray-200 rounded-lg mt-6 shadow-sm pl-3 focus:outline-none"
       >
         <option value="" disabled>
           Select Role
@@ -132,7 +132,7 @@ const Access: React.FC = () => {
         </div>
       )}
       <button
-        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg my-8 cursor-pointer shadow-sm"
+        className="w-80 h-12 font-bold text-xl border border-gray-200 bg-green-300 hover:bg-green-400 rounded-lg mt-6 cursor-pointer shadow-sm"
         onClick={handleSubmit}
       >
         Grant Access
