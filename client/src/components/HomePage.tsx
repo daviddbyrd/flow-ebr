@@ -4,7 +4,7 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (e: React.MouseEvent<HTMLButtonElement>) => {
-    navigate(`/home/${e.currentTarget.name}`, { replace: true });
+    navigate(`/home/${e.currentTarget.name}`);
   };
 
   return (

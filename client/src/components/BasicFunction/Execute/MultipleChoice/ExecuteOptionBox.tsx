@@ -5,6 +5,7 @@ interface ExecuteOptionsBoxProps {
   selectedOption: string | null;
   setSelectedOption: (selectedOption: string | null) => void;
   isUnlocked: boolean;
+  isComplete: boolean;
 }
 
 const ExecuteOptionBox: React.FC<ExecuteOptionsBoxProps> = ({
